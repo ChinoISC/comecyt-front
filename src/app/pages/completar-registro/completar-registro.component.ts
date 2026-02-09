@@ -233,32 +233,29 @@ export class CompletarRegistroComponent implements OnInit {
         fondoProgControl?.clearValidators();
         fondoProgControl?.setValue('', { emitEvent: false });
       }
-      fondoProgControl?.updateValueAndValidity({ emitEvent: false });
+      setTimeout(() => fondoProgControl?.updateValueAndValidity({ emitEvent: false }), 0);
     });
 
     // Validación condicional: Si el nivel de idioma cambia a Básico o Regular, desactivar certificación
     this.form.get('idioma_dominio_nombre')?.valueChanges.subscribe(nivelDominio => {
       const esCertificadoControl = this.form.get('idioma_es_certificado');
       if (nivelDominio !== 'Avanzado' && nivelDominio !== 'Excelente') {
-        // Si el nivel no es Avanzado o Excelente, desactivar certificación y limpiar campos
         esCertificadoControl?.setValue(false, { emitEvent: false });
         this.form.get('idioma_cert_institucion')?.setValue('', { emitEvent: false });
         this.form.get('idioma_cert_puntuacion')?.setValue('', { emitEvent: false });
         this.form.get('idioma_vigencia_fin')?.setValue('', { emitEvent: false });
-        // Limpiar validadores de certificación
         this.form.get('idioma_cert_institucion')?.clearValidators();
         this.form.get('idioma_cert_puntuacion')?.clearValidators();
-        this.form.get('idioma_cert_institucion')?.updateValueAndValidity({ emitEvent: false });
-        this.form.get('idioma_cert_puntuacion')?.updateValueAndValidity({ emitEvent: false });
       } else {
-        // Si el nivel es Avanzado o Excelente y hay certificación activa, restaurar validadores
         if (esCertificadoControl?.value) {
           this.form.get('idioma_cert_institucion')?.setValidators([Validators.required]);
           this.form.get('idioma_cert_puntuacion')?.setValidators([Validators.required]);
-          this.form.get('idioma_cert_institucion')?.updateValueAndValidity({ emitEvent: false });
-          this.form.get('idioma_cert_puntuacion')?.updateValueAndValidity({ emitEvent: false });
         }
       }
+      setTimeout(() => {
+        this.form.get('idioma_cert_institucion')?.updateValueAndValidity({ emitEvent: false });
+        this.form.get('idioma_cert_puntuacion')?.updateValueAndValidity({ emitEvent: false });
+      }, 0);
     });
 
     // Validación condicional: Si se activa certificación, validar campos requeridos
@@ -270,8 +267,10 @@ export class CompletarRegistroComponent implements OnInit {
         this.form.get('idioma_cert_institucion')?.clearValidators();
         this.form.get('idioma_cert_puntuacion')?.clearValidators();
       }
-      this.form.get('idioma_cert_institucion')?.updateValueAndValidity({ emitEvent: false });
-      this.form.get('idioma_cert_puntuacion')?.updateValueAndValidity({ emitEvent: false });
+      setTimeout(() => {
+        this.form.get('idioma_cert_institucion')?.updateValueAndValidity({ emitEvent: false });
+        this.form.get('idioma_cert_puntuacion')?.updateValueAndValidity({ emitEvent: false });
+      }, 0);
     });
 
     // Validación condicional: Si hay producto obtenido en divulgación, el archivo es requerido
@@ -283,7 +282,7 @@ export class CompletarRegistroComponent implements OnInit {
         archivoControl?.clearValidators();
         archivoControl?.setValue(null, { emitEvent: false });
       }
-      archivoControl?.updateValueAndValidity({ emitEvent: false });
+      setTimeout(() => archivoControl?.updateValueAndValidity({ emitEvent: false }), 0);
     });
 
     // Validación condicional: Si es empleo actual, deshabilitar y limpiar fecha de término
@@ -318,8 +317,10 @@ export class CompletarRegistroComponent implements OnInit {
         estadoUsaControl?.setValue('', { emitEvent: false });
       }
       
-      entidadControl?.updateValueAndValidity({ emitEvent: false });
-      estadoUsaControl?.updateValueAndValidity({ emitEvent: false });
+      setTimeout(() => {
+        entidadControl?.updateValueAndValidity({ emitEvent: false });
+        estadoUsaControl?.updateValueAndValidity({ emitEvent: false });
+      }, 0);
     });
 
     // Verificar estado inicial: si ya está marcado como actual, deshabilitar fecha de término

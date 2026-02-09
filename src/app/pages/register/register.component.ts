@@ -353,9 +353,9 @@ export class RegisterComponent implements OnInit {
         if (v && v !== v.toUpperCase()) {
           this.f.curp.setValue(v.toUpperCase(), { emitEvent: false });
         }
-        // Validar RFC cuando cambie el CURP
+        // Validar RFC cuando cambie el CURP (emitEvent: false evita recursión con Zone.js)
         if (this.f.rfc.value) {
-          this.f.rfc.updateValueAndValidity();
+          this.f.rfc.updateValueAndValidity({ emitEvent: false });
         }
       });
 
@@ -366,9 +366,9 @@ export class RegisterComponent implements OnInit {
         if (v && v !== v.toUpperCase()) {
           this.f.rfc.setValue(v.toUpperCase(), { emitEvent: false });
         }
-        // Validar CURP cuando cambie el RFC
+        // Validar CURP cuando cambie el RFC (emitEvent: false evita recursión con Zone.js)
         if (this.f.curp.value) {
-          this.f.curp.updateValueAndValidity();
+          this.f.curp.updateValueAndValidity({ emitEvent: false });
         }
       });
 

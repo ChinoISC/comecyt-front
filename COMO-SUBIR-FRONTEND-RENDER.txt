@@ -83,8 +83,12 @@ Errores frecuentes
   Así todas las rutas sirven el index.html y Angular las resuelve.
 
 - Llamadas al API fallan o CORS:
-  - Verifica apiBaseUrl en environment.production.ts.
-  - Configura CORS en el backend para el origen del front (https://tu-front.onrender.com).
+  - Verifica apiBaseUrl en environment.production.ts (sin barra final).
+  - Configura CORS en el backend para el origen del front (https://comecyt-front.onrender.com).
+  - "CORS Missing Allow Origin" o 404 en OPTIONS (ej. /auth/register): suele ser que el backend
+    en Render está dormido (plan free). La primera petición puede tardar 30–60 s en despertar;
+    reintenta o espera y vuelve a cargar. El backend debe usar server.port=${PORT:8080} (variable
+    PORT que Render asigna); no fijar un puerto fijo (ej. 8081) en producción.
 
 
 Resumen de URLs
