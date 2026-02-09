@@ -6,7 +6,7 @@ Requisitos previos
 -----------------
 - Cuenta en https://render.com
 - Repositorio Git con el código del frontend (carpeta Front/front-comecyt o la raíz del front)
-- URL del backend ya desplegado (ej. https://comecyt-api.onrender.com) para configurar la API
+- URL del backend ya desplegado (ej. https://comecyt-back.onrender.com) para configurar la API
 
 
 PASO 1: Configurar la URL del API para producción
@@ -106,7 +106,7 @@ Errores frecuentes
 
 Resumen de URLs
 ---------------
-- Backend (Web Service): https://comecyt-api.onrender.com
+- Backend (Web Service): https://comecyt-back.onrender.com
 - Frontend (Static Site): https://comecyt-portal.onrender.com
 - En environment.production.ts: apiBaseUrl = URL del backend.
 
