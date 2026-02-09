@@ -1,0 +1,249 @@
+<main class="postulacion-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <header class="postulacion-header text-center mb-5">
+          <div class="header-icon mb-3">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h1 class="postulacion-title">Completa tu Postulación</h1>
+          <p class="postulacion-subtitle">
+            Asegúrate de adjuntar tu CV en PDF y revisar que los datos sean correctos antes de enviar.
+          </p>
+        </header>
+
+        <!-- Card principal -->
+        <div class="postulacion-card">
+          <div class="card-body">
+            <form id="postulacionForm" class="needs-validation" novalidate aria-describedby="formHelp">
+              <div id="formHelp" class="form-help-text mb-4">
+                <i class="fas fa-info-circle me-2"></i>
+                Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+              </div>
+
+              <!-- Sección identificación -->
+              <section class="form-section mb-5">
+                <h5 class="section-title">
+                  <i class="fas fa-id-card me-2"></i>
+                  Identificación
+                </h5>
+
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label for="cedula" class="form-label">
+                      Número de Cédula Profesional <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <div class="input-group has-icon">
+                        <span class="input-group-text">
+                          <i class="fas fa-id-badge"></i>
+                        </span>
+                        <input 
+                          type="text" 
+                          id="cedula" 
+                          name="cedula"
+                          class="form-control input-custom" 
+                          placeholder="Ej. 1234567" 
+                          aria-describedby="icon-cedula"
+                          required 
+                          pattern="^[0-9A-Za-z\-]+$">
+                        <span class="validation-icon"></span>
+                      </div>
+                      <div class="invalid-feedback">Ingresa tu número de cédula profesional válido.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="curp" class="form-label">
+                      CURP <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <div class="input-group has-icon">
+                        <span class="input-group-text">
+                          <i class="fas fa-id-card"></i>
+                        </span>
+                        <input 
+                          type="text" 
+                          id="curp" 
+                          name="curp"
+                          class="form-control input-custom text-uppercase" 
+                          placeholder="Ej. GARC850101HDFABC09"
+                          aria-describedby="icon-curp" 
+                          required 
+                          maxlength="18" 
+                          pattern="^[A-Z0-9]{18}$">
+                        <span class="validation-icon"></span>
+                      </div>
+                      <div class="invalid-feedback">
+                        CURP inválida. Debe tener 18 caracteres alfanuméricos en mayúsculas.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Sección contacto -->
+              <section class="form-section mb-5">
+                <h5 class="section-title">
+                  <i class="fas fa-envelope me-2"></i>
+                  Contacto
+                </h5>
+
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label for="correo" class="form-label">
+                      Correo Electrónico <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <div class="input-group has-icon">
+                        <span class="input-group-text">
+                          <i class="fas fa-envelope"></i>
+                        </span>
+                        <input 
+                          type="email" 
+                          id="correo" 
+                          name="correo"
+                          class="form-control input-custom" 
+                          placeholder="correo@dominio.com"
+                          aria-describedby="icon-correo" 
+                          required>
+                        <span class="validation-icon"></span>
+                      </div>
+                      <div class="invalid-feedback">Introduce un correo válido.</div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <label for="correoConfirm" class="form-label">
+                      Confirmar Correo Electrónico <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <div class="input-group has-icon">
+                        <span class="input-group-text">
+                          <i class="fas fa-envelope"></i>
+                        </span>
+                        <input 
+                          type="email" 
+                          id="correoConfirm" 
+                          name="correoConfirm"
+                          class="form-control input-custom" 
+                          placeholder="Confirma tu correo"
+                          aria-describedby="icon-correo-confirm" 
+                          required>
+                        <span class="validation-icon"></span>
+                      </div>
+                      <div class="invalid-feedback">Los correos no coinciden.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="telefono" class="form-label">
+                      Número Telefónico <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-wrapper">
+                      <div class="input-group has-icon">
+                        <span class="input-group-text">
+                          <i class="fas fa-phone"></i>
+                        </span>
+                        <input 
+                          type="tel" 
+                          id="telefono" 
+                          name="telefono"
+                          class="form-control input-custom" 
+                          placeholder="(55) 1234 5678" 
+                          aria-describedby="icon-tel"
+                          required 
+                          pattern="^[0-9()+\-\s]{7,20}$">
+                        <span class="validation-icon"></span>
+                      </div>
+                      <div class="invalid-feedback">
+                        Introduce un teléfono válido (solo números y símbolos permitidos).
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Sección documentos -->
+              <section class="form-section mb-5">
+                <h5 class="section-title">
+                  <i class="fas fa-file-pdf me-2"></i>
+                  Documentos
+                </h5>
+
+                <div class="file-upload-wrapper">
+                  <label for="cv" class="form-label">
+                    <i class="fas fa-file-pdf me-2"></i>
+                    Currículum (PDF) <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <div class="file-input-group">
+                      <input 
+                        type="file" 
+                        id="cv" 
+                        name="cv"
+                        class="form-control input-custom file-input" 
+                        accept=".pdf" 
+                        required 
+                        aria-describedby="cvHelp">
+                      <div class="invalid-feedback">Adjunta tu currículum en formato PDF.</div>
+                    </div>
+                    <div id="cvHelp" class="form-text muted-small mt-2">
+                      <i class="fas fa-info-circle me-1"></i>
+                      Máx. 5 MB. Nombre del archivo sin caracteres especiales.
+                    </div>
+                    <div id="cvAlert" class="alert alert-danger mt-2" style="display:none;" role="alert"></div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Sección observaciones -->
+              <section class="form-section mb-5">
+                <h5 class="section-title">
+                  <i class="fas fa-comment-alt me-2"></i>
+                  Observaciones
+                </h5>
+                <div class="input-wrapper">
+                  <label for="observaciones" class="form-label">
+                    Observaciones Adicionales
+                  </label>
+                  <textarea 
+                    id="observaciones" 
+                    name="observaciones" 
+                    class="form-control input-custom" 
+                    rows="5"
+                    placeholder="Añade información relevante sobre tu experiencia o disponibilidad."
+                    aria-describedby="obsHelp"></textarea>
+                  <div id="obsHelp" class="form-text muted-small mt-2">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Opcional. Máx. 500 caracteres.
+                  </div>
+                </div>
+              </section>
+
+              <!-- Acciones -->
+              <div class="form-actions">
+                <button 
+                  type="submit"
+                  class="btn btn-primary-postulacion" 
+                  id="submitBtn">
+                  <i class="fas fa-paper-plane me-2"></i>
+                  Enviar Postulación
+                </button>
+                <a 
+                  href="/app/convocatorias" 
+                  class="btn btn-secondary-postulacion">
+                  <i class="fas fa-arrow-left me-2"></i>
+                  Volver a Convocatorias
+                </a>
+              </div>
+
+              <!-- Placeholder para mensajes de éxito/error (controlado por JS) -->
+              <div id="formMessage" class="form-message mt-4" role="status" aria-live="polite" style="display:none;"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

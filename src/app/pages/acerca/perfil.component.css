@@ -1,0 +1,81 @@
+/* Mismo look & feel que Step 2 (light only) */
+:host { color-scheme: light; }
+:root{
+  --ring: var(--color-dorado, #f4c24e);
+  --ink: #2b2b2b; --ink-muted:#6b6b6b;
+}
+
+
+
+.form-card{
+  border-radius:16px; background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.small-muted{ color:var(--ink-muted); }
+.req{ color:#d83a3a; }
+
+/* Inputs con icono */
+.has-icon .input-group-text{
+  background:#faf6f1; border-color:rgba(0,0,0,.12);
+}
+.input-custom{
+  border-radius:10px; background:#fff; color:var(--ink);
+  border:1px solid rgba(0,0,0,.12);
+  transition:border-color .12s ease, box-shadow .12s ease;
+}
+.input-custom:hover{ border-color:rgba(0,0,0,.22); }
+.input-custom:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--ring) 35%, transparent);
+}
+.form-select.input-custom{ padding-top:.5rem; padding-bottom:.5rem; }
+
+/* Ayudas/errores */
+.field-help{ margin-top:.35rem; font-size:.85rem; color:#d83a3a; }
+
+/* Toggle de contraseña */
+.toggle-visibility{ border-radius:10px; }
+
+/* Medidor de contraseña (0-3) */
+.pwd-meter{
+  height:6px; border-radius:999px; background:#eee; margin-top:.45rem;
+  position:relative; overflow:hidden;
+}
+.pwd-meter::after{
+  content:""; position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg,#f38,#fb3,#1f9d55);
+  transition:width .18s ease;
+}
+.pwd-meter[data-level="1"]::after{ width:33%; }
+.pwd-meter[data-level="2"]::after{ width:66%; }
+.pwd-meter[data-level="3"]::after{ width:100%; }
+
+/* CTA sticky en mobile */
+@media (max-width: 575.98px){
+  .actions-sticky{
+    position:sticky; bottom:0; background:#fff; padding:.75rem;
+    margin:0 -1rem -1rem; border-top:1px solid rgba(0,0,0,.08);
+  }
+}
+
+/* Accesibilidad focus */
+a:focus-visible, button:focus-visible, .input-custom:focus-visible{
+  outline:3px solid var(--ring); outline-offset:2px;
+}
+
+
+.input-group .form-control {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.toggle-visibility {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}

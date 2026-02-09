@@ -1,0 +1,270 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-xxl-10">
+    <div class="card p-4 form-card">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+        <div>
+          <h2 class="text-borgona mb-1">Perfil Personal</h2>
+          <p class="text-borgona mb-1">Actualiza tu perfil</p>
+          <p class="small-muted m-0">
+            Formatos: <b>PDF</b> y <b>JPG/PNG</b>. Tamaño máx. <b>{{ MAX_MB }} MB</b> por archivo.
+          </p>
+        </div>
+        <small class="muted-small">Paso 2 de 2</small>
+      </div>
+
+      <!-- Mensaje informativo cuando ya hay archivos cargados -->
+      <div *ngIf="archivosYaCargados" class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong>Archivos ya registrados:</strong> Los archivos ya han sido cargados previamente. Los campos están deshabilitados.
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate enctype="multipart/form-data">
+        <div class="row g-4">
+          <!-- Main content -->
+          <div class="col-12 col-lg-8">
+            <!-- 1. CV -->
+            <section id="sec-cv" class="sec">
+              <header class="sec-head">
+                <span class="sec-n">1</span>
+                <div class="sec-titles">
+                  <h3 class="sec-title">Currículum Vitae (PDF) <span class="req">*</span></h3>
+                  <div class="sec-meta">Máx. {{ MAX_MB }} MB</div>
+                </div>
+              </header>
+
+              <div class="drop"
+                   [class.drop--active]="dragging()==='cvFile'"
+                   (dragover)="onDragOver($event, 'cvFile')"
+                   (dragleave)="onDragLeave()"
+                   (drop)="onDrop($event, 'cvFile')">
+                <input type="file" class="visually-hidden" id="cvFile"
+                       (change)="onInputFile($event,'cvFile')" accept=".pdf,application/pdf" />
+                <label for="cvFile" class="drop-inner">
+                  <div class="drop-ico">⬆️</div>
+                  <div class="drop-title">Arrastra tu PDF o <u>selecciónalo</u></div>
+                </label>
+              </div>
+
+              <div class="file-chip" *ngIf="f.cvFile.value as cv">
+                <span class="chip-ico">📄</span>
+                <span class="chip-name" title="{{ cv.name }}">{{ cv.name }}</span>
+                <span class="chip-size">{{ humanSize(cv.size) }}</span>
+                <button type="button" class="chip-del" (click)="clearFile('cvFile')" aria-label="Eliminar archivo">✕</button>
+              </div>
+
+              <div class="field-help" *ngIf="f.cvFile.touched && f.cvFile.errors?.['requiredFile']">Adjunta tu CV.</div>
+              <div class="field-help" *ngIf="f.cvFile.touched && f.cvFile.errors?.['maxSize']">El archivo supera {{MAX_MB}} MB.</div>
+              <div class="field-help" *ngIf="f.cvFile.touched && f.cvFile.errors?.['accept']">Solo PDF.</div>
+            </section>
+
+            <!-- 2. Identidad fiscal -->
+            <section id="sec-fiscal" class="sec">
+              <header class="sec-head">
+                <span class="sec-n">2</span>
+                <div class="sec-titles">
+                  <h3 class="sec-title">Identidad fiscal</h3>
+                  <div class="sec-meta">RFC + INE (PDF) · Máx. {{ MAX_MB }} MB</div>
+                </div>
+              </header>
+
+              <div class="grid-2">
+                <div>
+                  <label for="rfcNum" class="form-label">RFC (sin guiones) <span class="req">*</span></label>
+                  <input id="rfcNum" type="text" class="form-control input-custom text-uppercase"
+                        [disabled]="archivosYaCargados && f.rfcNum.disabled"
+                        formControlName="rfcNum" maxlength="13" placeholder="XXXX001122ABC" autocomplete="off" />
+                  <div class="small-muted mt-1">En mayúsculas, sin guiones ni espacios.</div>
+                  <div class="field-help" *ngIf="f.rfcNum.touched && f.rfcNum.errors?.['required']">Campo obligatorio.</div>
+                  <div class="field-help" *ngIf="f.rfcNum.touched && f.rfcNum.errors?.['rfc']">Formato de RFC inválido.</div>
+                </div>
+
+                <div>
+                  <label for="fiscalPdf" class="form-label">INE (PDF) <span class="req">*</span></label>
+                  <div class="drop"
+                       [class.drop--active]="dragging()==='fiscalPdf'"
+                       (dragover)="onDragOver($event, 'fiscalPdf')"
+                       (dragleave)="onDragLeave()"
+                       (drop)="onDrop($event, 'fiscalPdf')">
+                    <input type="file" class="visually-hidden" id="fiscalPdf"
+                          (change)="onInputFile($event,'fiscalPdf')" accept=".pdf,application/pdf" />
+                    <label for="fiscalPdf" class="drop-inner">
+                      <div class="drop-ico">⬆️</div>
+                      <div class="drop-title">Arrastra tu PDF o <u>selecciónalo</u></div>
+                    </label>
+                  </div>
+
+                  <div class="file-chip" *ngIf="f.fiscalPdf.value as fiscal">
+                    <span class="chip-ico">📄</span>
+                    <span class="chip-name" title="{{ fiscal.name }}">{{ fiscal.name }}</span>
+                    <span class="chip-size">{{ humanSize(fiscal.size) }}</span>
+                    <button type="button" class="chip-del" (click)="clearFile('fiscalPdf')" aria-label="Eliminar archivo">✕</button>
+                  </div>
+
+                  <div class="field-help" *ngIf="f.fiscalPdf.touched && f.fiscalPdf.errors?.['requiredFile']">Adjunta la constancia.</div>
+                  <div class="field-help" *ngIf="f.fiscalPdf.touched && f.fiscalPdf.errors?.['maxSize']">Excede {{MAX_MB}} MB.</div>
+                  <div class="field-help" *ngIf="f.fiscalPdf.touched && f.fiscalPdf.errors?.['accept']">Solo PDF.</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Domicilio -->
+            <section id="sec-domicilio" class="sec">
+              <header class="sec-head">
+                <span class="sec-n">3</span>
+                <div class="sec-titles">
+                  <h3 class="sec-title">Comprobante de domicilio (PDF/JPG/PNG) <span class="req">*</span></h3>
+                  <div class="sec-meta">Máx. {{ MAX_MB }} MB</div>
+                </div>
+              </header>
+
+              <div class="drop"
+                   [class.drop--active]="dragging()==='domicilio'"
+                   [class.drop--disabled]="archivosYaCargados"
+                   (dragover)="onDragOver($event, 'domicilio')"
+                   (dragleave)="onDragLeave()"
+                   (drop)="onDrop($event, 'domicilio')">
+                <input type="file" class="visually-hidden" id="domicilio"
+                      [disabled]="archivosYaCargados"
+                      (change)="onInputFile($event,'domicilio')"
+                      accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" />
+                <label for="domicilio" class="drop-inner" [class.disabled]="archivosYaCargados">
+                  <div class="drop-ico">⬆️</div>
+                  <div class="drop-title">
+                    <span *ngIf="!archivosYaCargados">Arrastra tu archivo o <u>selecciónalo</u></span>
+                    <span *ngIf="archivosYaCargados" class="text-muted">Archivo ya cargado - Deshabilitado</span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="file-chip" *ngIf="f.domicilio.value as dom">
+                <span class="chip-ico">📄</span>
+                <span class="chip-name" title="{{ dom.name }}">{{ dom.name }}</span>
+                <span class="chip-size">{{ humanSize(dom.size) }}</span>
+                <button type="button" class="chip-del" (click)="clearFile('domicilio')" aria-label="Eliminar archivo">✕</button>
+              </div>
+
+              <div class="field-help" *ngIf="f.domicilio.touched && f.domicilio.errors?.['requiredFile']">Adjunta el comprobante.</div>
+              <div class="field-help" *ngIf="f.domicilio.touched && f.domicilio.errors?.['maxSize']">Excede {{MAX_MB}} MB.</div>
+              <div class="field-help" *ngIf="f.domicilio.touched && f.domicilio.errors?.['accept']">Formato no permitido.</div>
+            </section>
+
+            <!-- 4. Certificados (opcional, colapsable) -->
+            <section id="sec-certs" class="sec">
+              <header class="sec-head">
+                <span class="sec-n">4</span>
+                <div class="sec-titles">
+                  <h3 class="sec-title">Certificaciones <span class="tag-optional">Opcional</span></h3>
+                  <div class="sec-meta">PDF/JPG/PNG · Máx. {{ MAX_MB }} MB</div>
+                </div>
+                <button class="sec-toggle" type="button"
+                        [attr.aria-expanded]="showCerts" (click)="showCerts = !showCerts">
+                  {{ showCerts ? 'Ocultar' : 'Agregar' }}
+                </button>
+              </header>
+
+              <div class="sec-body" [class.is-hidden]="!showCerts">
+                <!-- Lista dinámica de certificados -->
+                <div class="certificados-list" *ngIf="certificadosArray.length > 0">
+                  <div *ngFor="let control of certificadosArray.controls; let i = index" class="certificado-item">
+                    <label [for]="'cert' + i" class="form-label">Evidencia {{ i + 1 }}</label>
+                    <div class="drop"
+                         [class.drop--active]="isDraggingOver(i)"
+                         [class.drop--disabled]="archivosYaCargados"
+                         (dragover)="onDragOver($event, i)"
+                         (dragleave)="onDragLeave()"
+                         (drop)="onDrop($event, i)">
+                      <input type="file" 
+                             class="visually-hidden" 
+                             [id]="'cert' + i"
+                             [disabled]="archivosYaCargados"
+                             (change)="onInputFile($event, i)"
+                             accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" />
+                      <label [for]="'cert' + i" class="drop-inner" [class.disabled]="archivosYaCargados">
+                        <div class="drop-ico">⬆️</div>
+                        <div class="drop-title">
+                          <span *ngIf="!archivosYaCargados">Arrastra aquí o <u>selecciona</u></span>
+                          <span *ngIf="archivosYaCargados" class="text-muted">Archivo ya cargado - Deshabilitado</span>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="file-chip" *ngIf="control.value as cert">
+                      <span class="chip-ico">📄</span>
+                      <span class="chip-name" [title]="cert.name">{{ cert.name }}</span>
+                      <span class="chip-size">{{ humanSize(cert.size) }}</span>
+                      <button type="button" 
+                              class="chip-del" 
+                              (click)="eliminarCertificado(i)" 
+                              [disabled]="archivosYaCargados"
+                              aria-label="Eliminar archivo">✕</button>
+                    </div>
+                    <!-- Botón para eliminar el campo completo (solo si no hay archivo) -->
+                    <button type="button" 
+                            class="btn btn-outline-danger btn-sm mt-2"
+                            *ngIf="!control.value && certificadosArray.length > 1"
+                            (click)="eliminarCampoCertificado(i)"
+                            [disabled]="archivosYaCargados">
+                      Eliminar campo
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Botón para agregar más certificados -->
+                <div class="mt-3">
+                  <button type="button" 
+                          class="btn btn-outline-secondary btn-sm"
+                          (click)="agregarCertificado()"
+                          [disabled]="archivosYaCargados">
+                    <span>+</span> Agregar evidencia
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Sticky checklist (desktop) -->
+          <aside class="col-12 col-lg-4 d-none d-lg-block">
+            <div class="side sticky-top">
+              <div class="side-title">Checklist</div>
+              <ul class="side-list">
+                <li [class.done]="f.cvFile.value">CV (PDF)</li>
+                <li [class.done]="f.rfcNum.valid">RFC válido</li>
+                <li [class.done]="f.fiscalPdf.value">Constancia fiscal (PDF)</li>
+                <li [class.done]="f.domicilio.value">Comprobante de domicilio</li>
+                <li [class.done]="hasCertificados()">Certificados (opcional)</li>
+              </ul>
+              <div class="side-tip small-muted">Marca verde = listo. Puedes volver a cualquier sección:</div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- CTA (anchors se conservan) -->
+        <!-- CTA -->
+<div class="d-flex gap-2 justify-content-between align-items-center mt-4 actions-sticky">
+  <button type="button" class="btn btn-outline-secondary" (click)="saveDraft()">Volver</button>
+
+  <div class="d-flex align-items-center gap-2">
+    <!-- Guardar borrador -->
+    <button type="button"
+       class="btn btn-outline-secondary"
+       (click)="saveDraft()"
+       [disabled]="submitting">
+      Guardar borrador
+    </button>
+
+    <!-- Completar registro -->
+    <button type="submit"
+       class="btn btn-borgona"
+       [disabled]="form.invalid || submitting">
+      <span *ngIf="!submitting">Completar registro</span>
+      <span *ngIf="submitting">Guardando...</span>
+    </button>
+  </div>
+</div>
+
+      </form>
+    </div>
+  </div>
+</div>

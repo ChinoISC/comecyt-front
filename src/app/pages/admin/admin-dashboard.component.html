@@ -1,0 +1,113 @@
+<div class="admin-dashboard">
+  <header class="dashboard-header">
+    <h1 class="dashboard-title">
+      <i class="fas fa-chart-pie me-2"></i>Dashboard
+    </h1>
+    <p class="dashboard-subtitle text-muted">Resumen del sistema SIIMEX</p>
+  </header>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-borgona" role="status"></div>
+    <p class="mt-2 text-muted">Cargando estadísticas...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ error }}
+  </div>
+
+  <ng-container *ngIf="stats && !loading">
+    <!-- KPIs -->
+    <section class="kpi-section">
+      <div class="row g-3">
+        <div class="col-6 col-lg">
+          <div class="kpi-card kpi-card-primary">
+            <div class="kpi-icon"><i class="fas fa-users"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-value">{{ stats.totalUsuarios }}</span>
+              <span class="kpi-label">Total usuarios</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg">
+          <div class="kpi-card kpi-card-investigadores">
+            <div class="kpi-icon"><i class="fas fa-microscope"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-value">{{ stats.investigadores }}</span>
+              <span class="kpi-label">Investigadores</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg">
+          <div class="kpi-card kpi-card-innovadores">
+            <div class="kpi-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-value">{{ stats.innovadores }}</span>
+              <span class="kpi-label">Innovadores</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg">
+          <div class="kpi-card kpi-card-activas">
+            <div class="kpi-icon"><i class="fas fa-user-check"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-value">{{ stats.cuentasActivas }}</span>
+              <span class="kpi-label">Cuentas activas</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg">
+          <div class="kpi-card kpi-card-suspendidas">
+            <div class="kpi-icon"><i class="fas fa-user-slash"></i></div>
+            <div class="kpi-content">
+              <span class="kpi-value">{{ stats.cuentasSuspendidas }}</span>
+              <span class="kpi-label">Suspendidas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gráficas -->
+    <section class="charts-section">
+      <div class="row g-4">
+        <!-- Gráfica de barras: registros por mes -->
+        <div class="col-12 col-lg-8">
+          <div class="chart-card">
+            <h3 class="chart-card-title"><i class="fas fa-chart-bar me-2"></i>Registros por mes</h3>
+            <div class="bar-chart" *ngIf="stats.registrosPorMes?.length">
+              <div class="bar-chart-bars">
+                <div *ngFor="let p of stats.registrosPorMes" class="bar-wrap">
+                  <div class="bar" [style.height.%]="barHeight(p.cantidad)" [title]="p.cantidad + ' registros'"></div>
+                </div>
+              </div>
+              <div class="bar-chart-labels">
+                <span *ngFor="let p of stats.registrosPorMes" class="bar-label">{{ p.etiqueta }}</span>
+              </div>
+            </div>
+            <p *ngIf="!stats.registrosPorMes?.length" class="text-muted small mb-0">Sin datos por mes.</p>
+          </div>
+        </div>
+
+        <!-- Gráfica circular: tipo de perfil -->
+        <div class="col-12 col-lg-4">
+          <div class="chart-card">
+            <h3 class="chart-card-title"><i class="fas fa-chart-pie me-2"></i>Por tipo de perfil</h3>
+            <div class="donut-wrap">
+              <div class="donut" [style.background]="donutGradient"></div>
+              <div class="donut-center">
+                <span class="donut-total">{{ stats.investigadores + stats.innovadores }}</span>
+                <span class="donut-label">total</span>
+              </div>
+            </div>
+            <div class="pie-legend">
+              <div *ngFor="let item of pieData" class="pie-legend-item">
+                <span class="pie-legend-dot" [class.investigadores]="item.label === 'Investigadores'" [class.innovadores]="item.label === 'Innovadores'"></span>
+                <span>{{ item.label }}: <strong>{{ item.valor }}</strong> ({{ item.porcentaje | number:'1.0-0' }}%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

@@ -1,0 +1,212 @@
+<ng-container *ngIf="mostrarNavbar">
+
+  <nav #navbarEl
+       class="navbar navbar-light comecyt-unified comecyt-unified--light sticky-top"
+       role="navigation" aria-label="Principal">
+
+    <div class="comecyt-unified__inner container-fluid px-3">
+
+      <!-- Logos institucionales -->
+      <a class="gov-logos" routerLink="/" aria-label="Ir a página principal">
+        <img src="assets/img/logo-edomex.png" alt="Gobierno del Estado de México" width="120" height="48" />
+        <img src="assets/img/logo.png" alt="COMECyT" />
+      </a>
+
+      <!-- Siempre mostrar menú hamburguesa -->
+      <div class="d-flex align-items-center ms-auto gap-2">
+        <ng-container *ngIf="!(loggedIn$ | async)">
+          <a class="btn btn-outline-borgona btn-sm d-none d-sm-inline-block" routerLink="/login">Iniciar sesión</a>
+          <a class="btn btn-borgona btn-sm d-none d-sm-inline-block" routerLink="/registro">Crear cuenta</a>
+        </ng-container>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#menuNav"
+                aria-controls="menuNav"
+                aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas: menú tipo SIIMEX (público + módulos si está logueado) -->
+  <div class="offcanvas offcanvas-end text-bg-dark"
+       tabindex="-1"
+       id="menuNav"
+       aria-labelledby="menuNavLabel">
+
+    <div class="offcanvas-header border-secondary">
+      <h5 class="offcanvas-title" id="menuNavLabel">Menú</h5>
+      <button type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Cerrar"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column gap-2 overflow-auto">
+
+      <!-- ========== 1. Sitio Web de Acceso al Sistema ========== -->
+      <h6 class="text-uppercase text-secondary small mt-2 mb-1 px-2">Sitio web</h6>
+      <ul class="navbar-nav gap-1">
+
+        <li class="nav-item">
+          <a class="nav-link nav-pill"
+             routerLink="/landing"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }"
+             data-bs-dismiss="offcanvas">
+            <span class="nav-ico" aria-hidden="true">🏠</span>
+            Inicio
+          </a>
+        </li>
+
+        <li class="nav-item" [class.open]="acercaOpen">
+          <!-- Invitado: Acerca con submenú Registro / Acceso -->
+          <ng-container *ngIf="!(loggedIn$ | async)">
+            <a class="nav-link nav-pill" href="#" (click)="acercaOpen = !acercaOpen; $event.preventDefault()">
+              <span class="nav-ico">ℹ️</span> Acerca del SIIMEX <span class="ms-auto">▾</span>
+            </a>
+            <ul class="submenu">
+              <li><a class="nav-link" routerLink="/registro" data-bs-dismiss="offcanvas">Registro</a></li>
+              <li><a class="nav-link" routerLink="/login" data-bs-dismiss="offcanvas">Acceso</a></li>
+            </ul>
+          </ng-container>
+          <!-- Logueado: solo enlace a Inicio (no mostrar Registro/Acceso) -->
+          <a *ngIf="loggedIn$ | async" class="nav-link nav-pill" routerLink="/landing" data-bs-dismiss="offcanvas">
+            <span class="nav-ico">ℹ️</span> Acerca del SIIMEX
+          </a>
+        </li>
+
+        <li class="nav-item" [class.open]="investigadoresOpen">
+          <a class="nav-link nav-pill"
+             href="#"
+             (click)="investigadoresOpen = !investigadoresOpen; $event.preventDefault()">
+            <span class="nav-ico">📖</span>
+            Investigadores
+            <span class="ms-auto">▾</span>
+          </a>
+          <ul class="submenu">
+            <li><a class="nav-link" routerLink="/investigadores" data-bs-dismiss="offcanvas">Directorio</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item" [class.open]="innovadoresOpen">
+          <a class="nav-link nav-pill"
+             href="#"
+             (click)="innovadoresOpen = !innovadoresOpen; $event.preventDefault()">
+            <span class="nav-ico">💡</span>
+            Innovadores
+            <span class="ms-auto">▾</span>
+          </a>
+          <ul class="submenu">
+            <li><a class="nav-link" routerLink="/investigadores" data-bs-dismiss="offcanvas">Directorio</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-pill"
+             routerLink="/app/convocatorias"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: false }"
+             data-bs-dismiss="offcanvas">
+            <span class="nav-ico">📋</span>
+            Convocatorias
+          </a>
+        </li>
+
+        <!-- Acceso solo para quien NO ha iniciado sesión -->
+        <li class="nav-item" *ngIf="!(loggedIn$ | async)">
+          <a class="nav-link nav-pill" routerLink="/login" data-bs-dismiss="offcanvas">
+            <span class="nav-ico">🔐</span> Acceso
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-pill"
+             routerLink="/contacto"
+             routerLinkActive="active"
+             data-bs-dismiss="offcanvas">
+            <span class="nav-ico">📞</span>
+            Contacto
+          </a>
+        </li>
+      </ul>
+
+      <!-- ========== 2. Módulos (solo si está logueado) ========== -->
+      <ng-container *ngIf="loggedIn$ | async">
+        <hr class="menu-sep my-2 border-secondary" />
+        <h6 class="text-uppercase text-secondary small mt-2 mb-1 px-2">Módulos</h6>
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item">
+            <a class="nav-link nav-pill"
+               routerLink="/app/cambiar-contrasena"
+               routerLinkActive="active"
+               data-bs-dismiss="offcanvas">
+              <span class="nav-ico">🔒</span> Recuperación de usuarios y/o contraseñas
+            </a>
+          </li>
+
+          <li class="nav-item" [class.open]="perfilesOpen">
+            <a class="nav-link nav-pill"
+               href="#"
+               (click)="perfilesOpen = !perfilesOpen; $event.preventDefault()">
+              <span class="nav-ico">👤</span>
+              Perfiles
+              <span class="ms-auto">▾</span>
+            </a>
+            <ul class="submenu">
+              <li><a class="nav-link" routerLink="/app/perfil" data-bs-dismiss="offcanvas">Ver perfil</a></li>
+              <li><a class="nav-link" routerLink="/app/registro2" data-bs-dismiss="offcanvas">Académico / Actualizar perfil</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'cursos' }" data-bs-dismiss="offcanvas">Profesional / Laboral</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'articulos' }" data-bs-dismiss="offcanvas">Producción investigativa</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'certs' }" data-bs-dismiss="offcanvas">Propiedad Intelectual</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'logros' }" data-bs-dismiss="offcanvas">Premios | Logros</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'herramientas' }" data-bs-dismiss="offcanvas">Herramientas</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'idiomas' }" data-bs-dismiss="offcanvas">Idiomas</a></li>
+              <li><a class="nav-link" routerLink="/app/trayectoria" [queryParams]="{ tab: 'incidencia' }" data-bs-dismiss="offcanvas">Incidencia social</a></li>
+              <li *ngIf="!(user$ | async)?.tienePerfilMigracion">
+                <a class="nav-link" routerLink="/completarRegistro" data-bs-dismiss="offcanvas">Completar registro</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-pill"
+               routerLink="/app/convocatorias"
+               routerLinkActive="active"
+               data-bs-dismiss="offcanvas">
+              <span class="nav-ico">🎓</span> Convocatorias
+            </a>
+          </li>
+        </ul>
+
+        <hr class="menu-sep my-2 border-secondary" />
+        <div class="d-grid gap-2">
+          <a routerLink="/app/convocatorias" class="btn btn-cta" data-bs-dismiss="offcanvas">
+            Postularme ahora
+          </a>
+          <button class="btn btn-outline-light" type="button"
+                  (click)="logoutAndGoLanding()"
+                  data-bs-dismiss="offcanvas">
+            Cerrar sesión
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- Invitados: botones de acceso -->
+      <ng-container *ngIf="!(loggedIn$ | async)">
+        <hr class="menu-sep my-2 border-secondary" />
+        <div class="d-grid gap-2">
+          <a routerLink="/login" class="btn btn-outline-light" data-bs-dismiss="offcanvas">Iniciar sesión</a>
+          <a routerLink="/registro" class="btn btn-cta" data-bs-dismiss="offcanvas">Crear cuenta</a>
+        </div>
+      </ng-container>
+
+      <div class="menu-foot mt-auto pt-3 muted-small text-secondary">
+        © COMECyT · Gobierno del Estado de México
+      </div>
+    </div>
+  </div>
+
+</ng-container>

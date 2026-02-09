@@ -1,0 +1,576 @@
+/* ============================================
+   ESTILOS GENERALES Y RESPONSIVE
+   ============================================ */
+
+/* Variables de color */
+:root {
+  --borgona: #8B1538;
+  --borgona-light: #a83d5a;
+  --borgona-dark: #6b0f2a;
+  --transition-speed: 0.3s;
+}
+
+/* ============================================
+   HEADER Y CARD PRINCIPAL
+   ============================================ */
+
+.card.border-borgona {
+  border-width: 2px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card.border-borgona:hover {
+  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.15);
+}
+
+.card-header.bg-light {
+  background-color: #f8f9fa !important;
+  border-bottom: 2px solid var(--borgona);
+}
+
+/* ============================================
+   TABS MEJORADAS Y RESPONSIVE
+   ============================================ */
+
+.tabs-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.tabs-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tabs-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.tabs-wrapper::-webkit-scrollbar-thumb {
+  background: var(--borgona);
+  border-radius: 3px;
+}
+
+.tabs-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--borgona-dark);
+}
+
+.nav-tabs-custom {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: max-content;
+  border-bottom: none;
+}
+
+.nav-tabs-custom .nav-item {
+  flex-shrink: 0;
+}
+
+.nav-tabs-custom .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #6c757d;
+  padding: 1rem 1.25rem;
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+  position: relative;
+  background: transparent;
+}
+
+.nav-tabs-custom .nav-link:hover {
+  color: var(--borgona);
+  background-color: rgba(139, 21, 56, 0.05);
+  border-bottom-color: rgba(139, 21, 56, 0.3);
+}
+
+.nav-tabs-custom .nav-link.active {
+  color: var(--borgona);
+  background-color: rgba(139, 21, 56, 0.08);
+  border-bottom-color: var(--borgona);
+  font-weight: 600;
+}
+
+.nav-tabs-custom .nav-link i {
+  font-size: 1.1rem;
+}
+
+/* ============================================
+   CONTENIDO DE TABS
+   ============================================ */
+
+.tab-content {
+  min-height: 400px;
+}
+
+.tab-pane {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   FORMULARIOS STICKY
+   ============================================ */
+
+.sticky-top-form {
+  position: sticky;
+  top: 80px; /* Ajustado para que no quede debajo del header */
+  z-index: 10; /* Debajo del header (1030) */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.sticky-top-form:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sticky-top-form .card-header {
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+/* ============================================
+   CERTIFICACIONES
+   ============================================ */
+
+.certificaciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#certList .list-group-item {
+  padding: 1.25rem;
+  margin-bottom: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: all var(--transition-speed) ease;
+  background: white;
+}
+
+#certList .list-group-item:hover {
+  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.15);
+  border-color: var(--borgona);
+  transform: translateY(-2px);
+}
+
+#certList .list-group-item .flex-grow-1 {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#certList .list-group-item .fw-bold {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  color: #212529;
+  font-size: 1rem;
+}
+
+#certList .list-group-item .text-muted {
+  font-size: 0.875rem;
+}
+
+/* Iconos de archivo mejorados */
+#certList .fas.fa-file-pdf,
+#certList .fas.fa-file-image,
+#certList .fas.fa-file-word,
+#certList .fas.fa-file-excel {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+#certList .fas.fa-file-pdf {
+  color: #dc3545;
+}
+
+#certList .fas.fa-file-image {
+  color: #0dcaf0;
+}
+
+#certList .fas.fa-file-word {
+  color: #0d6efd;
+}
+
+#certList .fas.fa-file-excel {
+  color: #198754;
+}
+
+/* ============================================
+   LISTAS (CURSOS, IDIOMAS, LOGROS)
+   ============================================ */
+
+.list-group-item {
+  border-left: 4px solid transparent;
+  transition: all var(--transition-speed) ease;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  background: white;
+}
+
+.list-group-item:hover {
+  border-left-color: var(--borgona);
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.1);
+  transform: translateX(4px);
+}
+
+.list-group-flush .list-group-item {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   HERRAMIENTAS
+   ============================================ */
+
+.tools-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.tools-container .badge {
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tools-container .badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 21, 56, 0.2);
+}
+
+.tools-container .badge .btn-close {
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+  opacity: 0.8;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.tools-container .badge .btn-close:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   BOTONES Y ACCIONES
+   ============================================ */
+
+.btn-group {
+  gap: 0.5rem;
+}
+
+.btn-group .btn {
+  border-radius: 0.375rem;
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+}
+
+.btn-outline-primary {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.btn-borgona {
+  background-color: var(--borgona);
+  border-color: var(--borgona);
+  color: white;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-borgona:hover {
+  background-color: var(--borgona-dark);
+  border-color: var(--borgona-dark);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 21, 56, 0.3);
+}
+
+/* ============================================
+   ESTADOS VACÍOS (EMPTY STATES)
+   ============================================ */
+
+.empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  border: 2px dashed #dee2e6;
+}
+
+.empty-state i {
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state small {
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   BADGES DE CONTADOR
+   ============================================ */
+
+.badge.bg-borgona {
+  background-color: var(--borgona) !important;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 1rem;
+}
+
+/* ============================================
+   FORMULARIOS
+   ============================================ */
+
+.form-label.fw-semibold {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.input-custom {
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: all var(--transition-speed) ease;
+}
+
+.input-custom:focus {
+  border-color: var(--borgona);
+  box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
+}
+
+.form-select.input-custom:focus {
+  border-color: var(--borgona);
+  box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
+}
+
+/* ============================================
+   MODAL DE IMÁGENES (SWEETALERT)
+   ============================================ */
+
+.swal2-image-modal .swal2-image {
+  max-width: 90%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .sticky-top-form {
+    position: relative;
+    top: 0;
+    margin-bottom: 2rem;
+  }
+
+  .tab-content {
+    padding: 1.5rem !important;
+  }
+
+  .nav-tabs-custom .nav-link {
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  .card-header {
+    padding: 1rem;
+  }
+
+  .card-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .tab-content {
+    padding: 1rem !important;
+  }
+
+  .nav-tabs-custom .nav-link {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .nav-tabs-custom .nav-link i {
+    font-size: 1rem;
+  }
+
+  #certList .list-group-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+    padding: 1rem;
+  }
+
+  #certList .list-group-item .btn-group {
+    width: 100%;
+    margin-top: 0.75rem;
+    justify-content: stretch;
+  }
+
+  #certList .list-group-item .btn-group .btn {
+    flex: 1;
+  }
+
+  .list-group-item {
+    padding: 1rem;
+  }
+
+  .tools-container {
+    gap: 0.5rem;
+  }
+
+  .tools-container .badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .empty-state {
+    padding: 1.5rem 1rem;
+  }
+
+  .empty-state i {
+    font-size: 2rem !important;
+  }
+
+  .order-1 {
+    order: 1 !important;
+  }
+
+  .order-2 {
+    order: 2 !important;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .nav-tabs-custom .nav-link span.d-sm-inline {
+    display: none !important;
+  }
+
+  .nav-tabs-custom .nav-link {
+    padding: 0.625rem 0.75rem;
+    min-width: 60px;
+    justify-content: center;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   ANIMACIONES Y TRANSICIONES
+   ============================================ */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.list-group-item,
+#certList .list-group-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Loading states */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+}
+
+/* ============================================
+   UTILIDADES
+   ============================================ */
+
+.text-borgona {
+  color: var(--borgona) !important;
+}
+
+.bg-borgona {
+  background-color: var(--borgona) !important;
+}
+
+.border-borgona {
+  border-color: var(--borgona) !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}

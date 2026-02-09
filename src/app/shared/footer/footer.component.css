@@ -1,0 +1,39 @@
+.site-footer{
+  margin-top: 2.5rem;
+  padding: 1.5rem 0 1.75rem;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+.footer-inner{
+  display: grid;
+  gap: .75rem;
+  justify-items: center;
+  text-align: center;
+}
+
+/* ✅ AHORA SÍ coincide con tu HTML */
+.footer-flores{
+  width: min(720px, 90%);  /* controla el tamaño en desktop */
+  max-height: 120px;       /* evita que se coma la pantalla */
+  height: auto;
+  object-fit: contain;
+  opacity: .95;
+  display: block;
+}
+
+.footer-text{
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+
+/* Mobile tuning */
+@media (max-width: 576px){
+  .footer-flores{
+    width: 95%;
+    max-height: 90px;
+  }
+}
+.site-footer{
+  border-top: 3px solid #6a0032;
+}

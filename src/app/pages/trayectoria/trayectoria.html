@@ -1,0 +1,519 @@
+<header class="mb-4">
+  <h1 class="text-borgona mb-2">Trayectoria educativa</h1>
+  <p class="text-muted mb-0">Administra tus certificaciones, cursos, herramientas, idiomas y logros de forma organizada.</p>
+</header>
+
+<!-- Card principal -->
+<section class="card border-borgona shadow-sm" aria-labelledby="trayTitle">
+  <div class="card-header bg-light border-bottom">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+      <h2 id="trayTitle" class="mb-0 text-borgona">
+        <i class="fas fa-graduation-cap me-2"></i>Trayectoria educativa
+      </h2>
+      <small class="text-muted">Actualiza tu perfil académico y profesional</small>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <!-- Tabs mejoradas con scroll horizontal en móviles -->
+    <div class="tabs-wrapper">
+      <ul class="nav nav-tabs nav-tabs-custom mb-0" id="trayNav" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="certs-tab" data-bs-toggle="tab" data-bs-target="#certs" type="button" role="tab" aria-controls="certs" aria-selected="true">
+            <i class="fas fa-certificate me-1"></i>
+            <span class="d-none d-sm-inline">Certificaciones</span>
+            <span class="d-inline d-sm-none">Certs</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="cursos-tab" data-bs-toggle="tab" data-bs-target="#cursos" type="button" role="tab" aria-controls="cursos" aria-selected="false">
+            <i class="fas fa-book me-1"></i>
+            <span class="d-none d-sm-inline">Cursos</span>
+            <span class="d-inline d-sm-none">Cursos</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="herramientas-tab" data-bs-toggle="tab" data-bs-target="#herramientas" type="button" role="tab" aria-controls="herramientas" aria-selected="false">
+            <i class="fas fa-tools me-1"></i>
+            <span class="d-none d-sm-inline">Herramientas</span>
+            <span class="d-inline d-sm-none">Tools</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="idiomas-tab" data-bs-toggle="tab" data-bs-target="#idiomas" type="button" role="tab" aria-controls="idiomas" aria-selected="false">
+            <i class="fas fa-language me-1"></i>
+            <span class="d-none d-sm-inline">Idiomas</span>
+            <span class="d-inline d-sm-none">Idiomas</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="logros-tab" data-bs-toggle="tab" data-bs-target="#logros" type="button" role="tab" aria-controls="logros" aria-selected="false">
+            <i class="fas fa-trophy me-1"></i>
+            <span class="d-none d-sm-inline">Logros</span>
+            <span class="d-inline d-sm-none">Logros</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="articulos-tab" data-bs-toggle="tab" data-bs-target="#articulos" type="button" role="tab" aria-controls="articulos" aria-selected="false">
+            <i class="fas fa-file-alt me-1"></i>
+            <span class="d-none d-sm-inline">Artículos</span>
+            <span class="d-inline d-sm-none">Art.</span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="incidencia-tab" data-bs-toggle="tab" data-bs-target="#incidencia" type="button" role="tab" aria-controls="incidencia" aria-selected="false">
+            <i class="fas fa-handshake-angle me-1"></i>
+            <span class="d-none d-sm-inline">Incidencia social</span>
+            <span class="d-inline d-sm-none">Incidencia</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Tab panes con mejor estructura -->
+    <div class="tab-content p-3 p-md-4" id="trayTabContent">
+      <!-- Certificaciones -->
+      <div class="tab-pane fade show active" id="certs" role="tabpanel" aria-labelledby="certs-tab" tabindex="0">
+        <div class="row g-4">
+          <!-- Lista de certificaciones -->
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-certificate text-borgona me-2"></i>Certificaciones registradas
+              </h4>
+              <span id="certCount" class="badge bg-borgona">0</span>
+            </div>
+            <div id="certList" class="certificaciones-container">
+              <!-- Items llenados dinámicamente -->
+            </div>
+            <div id="certEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-certificate fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay certificaciones registradas.</p>
+                <small class="text-muted">Agrega tu primera certificación usando el formulario</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario de agregar -->
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar certificación
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="certForm" class="needs-validation" novalidate>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Nombre <span class="text-danger">*</span></label>
+                    <input id="certName" class="form-control input-custom" type="text" required maxlength="200" placeholder="Ej: Certificado de Python" />
+                    <div class="invalid-feedback">Introduce el nombre de la certificación.</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Archivo <span class="text-danger">*</span></label>
+                    <input id="certFile" class="form-control input-custom" type="file" accept=".pdf,.jpg,.png,.jpeg" required (change)="subirCertificacion($event)" />
+                    <small class="form-text text-muted">Formatos: PDF, JPG, PNG (máx. 10MB)</small>
+                    <div class="invalid-feedback">Selecciona un archivo.</div>
+                  </div>
+
+                  <div id="certFormMsg" class="pub-inline-feedback mt-2" role="status" aria-live="polite" style="display:none;"></div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Cursos -->
+      <div class="tab-pane fade" id="cursos" role="tabpanel" aria-labelledby="cursos-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-book text-borgona me-2"></i>Cursos y diplomados
+              </h4>
+              <span id="courseCount" class="badge bg-borgona">0</span>
+            </div>
+            <div id="coursesList" class="list-group list-group-flush"></div>
+            <div id="coursesEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-book fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay cursos registrados.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar curso
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="courseForm" class="needs-validation" novalidate (ngSubmit)="guardarCurso(); $event.preventDefault()">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
+                    <input id="courseTitle" class="form-control input-custom" type="text" required placeholder="Ej: Curso de Angular" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Programa/Institución</label>
+                    <input id="courseProvider" class="form-control input-custom" type="text" placeholder="Ej: Universidad Nacional" />
+                  </div>
+
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label fw-semibold">Duración (hrs)</label>
+                      <input id="courseHours" class="form-control input-custom" type="number" min="1" placeholder="40" />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label fw-semibold">Institución</label>
+                      <input id="courseInstitucion" class="form-control input-custom" type="text" placeholder="Institución" />
+                    </div>
+                  </div>
+
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-borgona btn-sm flex-fill">
+                      <i class="fas fa-save me-1"></i>Guardar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="cursoForm = {}">
+                      <i class="fas fa-times me-1"></i>Limpiar
+                    </button>
+                  </div>
+
+                  <div id="courseFormMsg" class="pub-inline-feedback mt-2" role="status" aria-live="polite" style="display:none;"></div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Herramientas -->
+      <div class="tab-pane fade" id="herramientas" role="tabpanel" aria-labelledby="herramientas-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-tools text-borgona me-2"></i>Herramientas y tecnologías
+              </h4>
+              <span id="toolCount" class="badge bg-borgona">0/12</span>
+            </div>
+            <div id="toolsList" class="tools-container"></div>
+            <div id="toolsEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-tools fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay herramientas registradas.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Añadir herramienta
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="input-group mb-2">
+                  <input id="toolInput" class="form-control input-custom" type="text" placeholder="Ej. Python, Git, QGIS" />
+                  <button id="addToolBtn" class="btn btn-borgona" type="button" (click)="agregarHerramienta()">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <small class="text-muted">
+                  <i class="fas fa-info-circle me-1"></i>Máx. 12 herramientas. Evita duplicados.
+                </small>
+                <div id="toolMsg" class="small-muted mt-2"></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Idiomas -->
+      <div class="tab-pane fade" id="idiomas" role="tabpanel" aria-labelledby="idiomas-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-language text-borgona me-2"></i>Idiomas
+              </h4>
+              <span id="langCount" class="badge bg-borgona">0</span>
+            </div>
+            <div id="langsList" class="list-group list-group-flush"></div>
+            <div id="langsEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-language fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay idiomas registrados.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar idioma
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="langForm" class="needs-validation" novalidate (ngSubmit)="guardarIdioma(); $event.preventDefault()">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Idioma <span class="text-danger">*</span></label>
+                    <input id="langName" class="form-control input-custom" type="text" required placeholder="Ej: Inglés" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Nivel</label>
+                    <select id="langLevel" class="form-select input-custom">
+                      <option value="basico">Básico</option>
+                      <option value="intermedio">Intermedio</option>
+                      <option value="avanzado">Avanzado</option>
+                      <option value="nativo">Nativo</option>
+                    </select>
+                  </div>
+
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-borgona btn-sm flex-fill">
+                      <i class="fas fa-save me-1"></i>Guardar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="idiomaForm = {}">
+                      <i class="fas fa-times me-1"></i>Limpiar
+                    </button>
+                  </div>
+
+                  <div id="langFormMsg" class="pub-inline-feedback mt-2" role="status" aria-live="polite" style="display:none;"></div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Logros -->
+      <div class="tab-pane fade" id="logros" role="tabpanel" aria-labelledby="logros-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-trophy text-borgona me-2"></i>Logros
+              </h4>
+              <span id="logroCount" class="badge bg-borgona">0</span>
+            </div>
+            <div id="achievementsList" class="list-group list-group-flush"></div>
+            <div id="achEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-trophy fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay logros registrados.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar logro
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="achievementForm" class="needs-validation" novalidate (ngSubmit)="guardarLogro(); $event.preventDefault()">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
+                    <input id="achTitle" class="form-control input-custom" type="text" required placeholder="Ej: Premio a la Excelencia" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea id="achDesc" class="form-control input-custom" rows="3" placeholder="Describe tu logro..."></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-calendar me-1"></i>Fecha
+                    </label>
+                    <input id="achDate" class="form-control input-custom" type="date" />
+                    <small class="form-text text-muted">Fecha en que obtuviste el logro</small>
+                  </div>
+
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-borgona btn-sm flex-fill">
+                      <i class="fas fa-save me-1"></i>Guardar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="logroForm = {}">
+                      <i class="fas fa-times me-1"></i>Limpiar
+                    </button>
+                  </div>
+
+                  <div id="achFormMsg" class="pub-inline-feedback mt-2" role="status" aria-live="polite" style="display:none;"></div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Artículos -->
+      <div class="tab-pane fade" id="articulos" role="tabpanel" aria-labelledby="articulos-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-file-alt text-borgona me-2"></i>Artículos y publicaciones
+              </h4>
+              <span id="articleCount" class="badge bg-borgona">0</span>
+            </div>
+            <div id="articlesList" class="list-group list-group-flush"></div>
+            <div id="articlesEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay artículos registrados.</p>
+                <small class="text-muted">Agrega tu primera publicación usando el formulario</small>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar artículo
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="articleForm" class="needs-validation" novalidate (ngSubmit)="guardarArticulo(); $event.preventDefault()">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Título del artículo <span class="text-danger">*</span></label>
+                    <input id="articleTitle" class="form-control input-custom" type="text" required placeholder="Ej: Machine Learning Applications" />
+                    <div class="invalid-feedback">Introduce el título del artículo.</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Revista/Publicación</label>
+                    <input id="articleJournal" class="form-control input-custom" type="text" placeholder="Ej: Nature, Science" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Año de publicación</label>
+                    <input id="articleYear" class="form-control input-custom" type="number" min="1800" max="9999" placeholder="Ej: 2024" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">DOI (Opcional)</label>
+                    <input id="articleDOI" class="form-control input-custom" type="text" placeholder="Ej: 10.1000/xyz123" />
+                    <small class="form-text text-muted">Identificador Digital del Objeto</small>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">URL (Opcional)</label>
+                    <input id="articleURL" class="form-control input-custom" type="url" placeholder="https://..." />
+                  </div>
+
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-borgona btn-sm flex-fill">
+                      <i class="fas fa-save me-1"></i>Guardar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="articuloForm = {}">
+                      <i class="fas fa-times me-1"></i>Limpiar
+                    </button>
+                  </div>
+
+                  <div id="articleFormMsg" class="pub-inline-feedback mt-2" role="status" aria-live="polite" style="display:none;"></div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Incidencia social -->
+      <div class="tab-pane fade" id="incidencia" role="tabpanel" aria-labelledby="incidencia-tab" tabindex="0">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8 order-2 order-lg-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">
+                <i class="fas fa-handshake-angle text-borgona me-2"></i>Incidencia social
+              </h4>
+              <span id="incidenciaCount" class="badge bg-borgona">0</span>
+            </div>
+            <p class="text-muted small mb-3">Investigaciones, proyectos o acciones con impacto social. Indica título, ubicación y descripción.</p>
+            <div id="incidenciaList" class="list-group list-group-flush"></div>
+            <div id="incidenciaEmpty" class="empty-state" style="display:none;">
+              <div class="text-center py-5">
+                <i class="fas fa-handshake-angle fa-3x text-muted mb-3"></i>
+                <p class="text-muted mb-0">No hay registros de incidencia social.</p>
+                <small class="text-muted">Agrega uno con el formulario</small>
+              </div>
+            </div>
+          </div>
+
+          <aside class="col-12 col-lg-4 order-1 order-lg-2">
+            <div class="card border-borgona sticky-top-form">
+              <div class="card-header bg-borgona text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-plus-circle me-2"></i>Agregar incidencia social
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="incidenciaForm" class="needs-validation" novalidate (ngSubmit)="guardarIncidenciaSocial(); $event.preventDefault()">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Investigación / Título <span class="text-danger">*</span></label>
+                    <input id="incidenciaTitulo" class="form-control input-custom" type="text" required placeholder="Ej: Proyecto de salud comunitaria" />
+                    <div class="invalid-feedback">El título es requerido.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Ubicación</label>
+                    <input id="incidenciaUbicacion" class="form-control input-custom" type="text" placeholder="Lugar, institución o región" />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea id="incidenciaDescripcion" class="form-control input-custom" rows="3" placeholder="Describe el proyecto o impacto..."></textarea>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label fw-semibold">Fecha</label>
+                      <input id="incidenciaFecha" class="form-control input-custom" type="date" />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label fw-semibold">Año</label>
+                      <input id="incidenciaAnio" class="form-control input-custom" type="number" min="1900" max="2100" placeholder="Ej: 2024" />
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-borgona btn-sm flex-fill">
+                      <i class="fas fa-save me-1"></i>Guardar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary btn-sm" (click)="incidenciaForm = {}">
+                      <i class="fas fa-times me-1"></i>Limpiar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal ligero para ver ítem (reutilizable) -->
+<div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-borgona">
+      <div class="modal-header">
+        <h5 class="modal-title text-borgona" id="itemModalLabel">Detalle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="itemModalBody" aria-live="polite"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

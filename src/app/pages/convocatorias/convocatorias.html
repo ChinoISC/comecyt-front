@@ -1,0 +1,446 @@
+<!-- Contenedor principal -->
+<main class="container mt-5 mb-5">
+  <header
+    class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3 mb-4"
+  >
+    <div>
+      <h2 class="text-borgona">Convocatorias Vigentes</h2>
+      <p class="muted-small mb-0">
+        Explora oportunidades de investigación y postúlate según tu perfil.
+      </p>
+    </div>
+
+    <!-- Filtros conectados al TS -->
+    <form class="conv-filters" [formGroup]="form">
+      <div class="filter-group">
+        <i class="fas fa-search filter-icon"></i>
+        <input
+          formControlName="q"
+          type="search"
+          class="form-control input-filter"
+          placeholder="Buscar por palabra clave..."
+          aria-label="Buscar convocatorias"
+        />
+      </div>
+      <div class="filter-group">
+        <i class="fas fa-filter filter-icon"></i>
+        <select
+          formControlName="area"
+          class="form-select"
+          aria-label="Filtrar por área"
+        >
+          <option value="">Todas las áreas</option>
+          <option value="energias">Energías</option>
+          <option value="educacion">Educación</option>
+          <option value="tecnologia">Tecnología</option>
+        </select>
+      </div>
+    </form>
+  </header>
+
+  <!-- Mensajes de feedback -->
+  <div #feedbackBar class="mb-3" style="display: none">
+    <div class="alert alert-info mb-0">Buscando convocatorias...</div>
+  </div>
+
+  <!-- Grid de tarjetas (tus cards estáticas) -->
+  <section class="row" #cardsContainer id="cardsContainer" aria-live="polite">
+    <!-- Card 1 -->
+    <div
+      class="col-md-4 mb-4"
+      data-area="energias"
+      data-keywords="energías renovables rural campo impacto ambiental"
+    >
+      <div class="conv-card h-100">
+        <div class="conv-card-header">
+          <div class="conv-card-icon">
+            <img src="assets/img/solar-energy.png" alt="" aria-hidden="true" />
+          </div>
+          <div class="conv-card-match">
+            <div class="match-circle" [attr.data-percent]="85">
+              <svg class="match-svg" viewBox="0 0 36 36">
+                <path class="match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="match-circle-progress" stroke-dasharray="85, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="match-percent">85%</div>
+            </div>
+            <span class="match-label">Compatibilidad</span>
+          </div>
+        </div>
+        <div class="conv-card-body">
+          <h5 class="conv-card-title">Convocatoria de Investigación 1</h5>
+          <p class="conv-card-desc">Estudio sobre energías renovables en zonas rurales.</p>
+          <div class="conv-card-meta">
+            <div class="meta-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Cierre: <strong>15 nov 2025</strong></span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-tag"></i>
+              <span>Energías</span>
+            </div>
+          </div>
+        </div>
+        <div class="conv-card-footer">
+          <button
+            class="btn btn-outline-conv"
+            type="button"
+            (click)="showModalById('modalConv1')"
+          >
+            <i class="fas fa-info-circle me-1"></i>
+            Requisitos
+          </button>
+          <button class="btn btn-primary-conv" type="button" (click)="showModalById('modalConv1')">
+            <i class="fas fa-paper-plane me-1"></i>
+            Postúlate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div
+      class="col-md-4 mb-4"
+      data-area="educacion"
+      data-keywords="software educativo comunidades indígenas intercultural"
+    >
+      <div class="conv-card h-100">
+        <div class="conv-card-header">
+          <div class="conv-card-icon">
+            <img src="assets/img/devops.png" alt="" aria-hidden="true" />
+          </div>
+          <div class="conv-card-match">
+            <div class="match-circle" [attr.data-percent]="72">
+              <svg class="match-svg" viewBox="0 0 36 36">
+                <path class="match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="match-circle-progress" stroke-dasharray="72, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="match-percent">72%</div>
+            </div>
+            <span class="match-label">Compatibilidad</span>
+          </div>
+        </div>
+        <div class="conv-card-body">
+          <h5 class="conv-card-title">Convocatoria de Investigación 2</h5>
+          <p class="conv-card-desc">Desarrollo de software educativo para comunidades indígenas.</p>
+          <div class="conv-card-meta">
+            <div class="meta-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Cierre: <strong>01 dic 2025</strong></span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-tag"></i>
+              <span>Educación</span>
+            </div>
+          </div>
+        </div>
+        <div class="conv-card-footer">
+          <button
+            class="btn btn-outline-conv"
+            type="button"
+            (click)="showModalById('modalConv2')"
+          >
+            <i class="fas fa-info-circle me-1"></i>
+            Requisitos
+          </button>
+          <button class="btn btn-primary-conv" type="button" (click)="showModalById('modalConv2')">
+            <i class="fas fa-paper-plane me-1"></i>
+            Postúlate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div
+      class="col-md-4 mb-4"
+      data-area="tecnologia"
+      data-keywords="análisis datos pedagogía digital evaluación impacto"
+    >
+      <div class="conv-card h-100">
+        <div class="conv-card-header">
+          <div class="conv-card-icon">
+            <img
+              src="/assets/img/creative-education.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+          <div class="conv-card-match">
+            <div class="match-circle" [attr.data-percent]="95">
+              <svg class="match-svg" viewBox="0 0 36 36">
+                <path class="match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="match-circle-progress" stroke-dasharray="95, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="match-percent">95%</div>
+            </div>
+            <span class="match-label">Compatibilidad</span>
+          </div>
+        </div>
+        <div class="conv-card-body">
+          <h5 class="conv-card-title">Convocatoria de Investigación 3</h5>
+          <p class="conv-card-desc">Análisis de impacto tecnológico en educación media superior.</p>
+          <div class="conv-card-meta">
+            <div class="meta-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Cierre: <strong>20 dic 2025</strong></span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-tag"></i>
+              <span>Tecnología</span>
+            </div>
+          </div>
+        </div>
+        <div class="conv-card-footer">
+          <button
+            class="btn btn-outline-conv"
+            type="button"
+            (click)="showModalById('modalConv3')"
+          >
+            <i class="fas fa-info-circle me-1"></i>
+            Requisitos
+          </button>
+          <button class="btn btn-primary-conv" type="button" (click)="showModalById('modalConv3')">
+            <i class="fas fa-paper-plane me-1"></i>
+            Postúlate
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empty state -->
+  <div #emptyState id="emptyState" class="text-center mt-4" style="display: none">
+    <img src="assets/img/devops.png" alt="" style="width: 80px; opacity: 0.6" />
+    <p class="muted-small mt-2">No se encontraron convocatorias que coincidan con tu búsqueda.</p>
+  </div>
+</main>
+
+<!-- Modales (sin cambios visuales) -->
+<!-- Modal 1 -->
+<div
+  class="modal fade"
+  id="modalConv1"
+  tabindex="-1"
+  aria-labelledby="modalConv1Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-borgona">
+      <div class="modal-header">
+        <h5 class="modal-title text-borgona" id="modalConv1Label">
+          Convocatoria de Investigación 1
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <section>
+          <h6 class="text-borgona">Resumen</h6>
+          <p>
+            Estudio interdisciplinario sobre implementación y evaluación de sistemas de energías
+            renovables en comunidades rurales, con énfasis en impacto social y sostenibilidad.
+          </p>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">Requisitos</h6>
+          <ul>
+            <li>Experiencia en energías renovables</li>
+            <li>Trabajo de campo y levantamiento de datos</li>
+            <li>Análisis de impacto ambiental</li>
+          </ul>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">
+            <i class="fas fa-chart-line me-2"></i>Compatibilidad con tu CV
+          </h6>
+          <div class="modal-match-container">
+            <div class="modal-match-circle" [attr.data-percent]="85">
+              <svg class="modal-match-svg" viewBox="0 0 36 36">
+                <path class="modal-match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="modal-match-circle-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="modal-match-percent">85%</div>
+            </div>
+            <div class="modal-match-info">
+              <p class="match-status match-high">
+                <i class="fas fa-check-circle me-2"></i>
+                Tu currículum cumple con los requisitos de esta convocatoria.
+              </p>
+              <div class="match-suggestions">
+                <strong>Sugerencias:</strong>
+                <ul>
+                  <li>Revisa que tu CV incluya proyectos similares</li>
+                  <li>Destaca publicaciones relevantes</li>
+                  <li>Incluye referencias de trabajo de campo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-borgona" [routerLink]="'/app/postulacion'" data-bs-dismiss="modal">
+          Postularse
+        </a>
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div
+  class="modal fade"
+  id="modalConv2"
+  tabindex="-1"
+  aria-labelledby="modalConv2Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-borgona">
+      <div class="modal-header">
+        <h5 class="modal-title text-borgona" id="modalConv2Label">
+          Convocatoria de Investigación 2
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <section>
+          <h6 class="text-borgona">Resumen</h6>
+          <p>
+            Estudio interdisciplinario sobre implementación y evaluación de sistemas de energías
+            renovables en comunidades rurales, con énfasis en impacto social y sostenibilidad.
+          </p>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">Requisitos</h6>
+          <ul>
+            <li>Experiencia en energías renovables</li>
+            <li>Trabajo de campo y levantamiento de datos</li>
+            <li>Análisis de impacto ambiental</li>
+          </ul>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">
+            <i class="fas fa-chart-line me-2"></i>Compatibilidad con tu CV
+          </h6>
+          <div class="modal-match-container">
+            <div class="modal-match-circle" [attr.data-percent]="72">
+              <svg class="modal-match-svg" viewBox="0 0 36 36">
+                <path class="modal-match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="modal-match-circle-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="modal-match-percent">72%</div>
+            </div>
+            <div class="modal-match-info">
+              <p class="match-status match-medium">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Tu currículum cumple parcialmente con los requisitos de esta convocatoria.
+              </p>
+              <div class="match-suggestions">
+                <strong>Sugerencias:</strong>
+                <ul>
+                  <li>Revisa que tu CV incluya proyectos similares</li>
+                  <li>Destaca publicaciones relevantes</li>
+                  <li>Incluye referencias de trabajo de campo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-borgona" [routerLink]="'/app/postulacion'" data-bs-dismiss="modal">
+          Postularse
+        </a>
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div
+  class="modal fade"
+  id="modalConv3"
+  tabindex="-1"
+  aria-labelledby="modalConv3Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-borgona">
+      <div class="modal-header">
+        <h5 class="modal-title text-borgona" id="modalConv3Label">
+            Convocatoria de Investigación 3
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="modal-body">
+       <section>
+          <h6 class="text-borgona">Resumen</h6>
+          <p>
+            Estudio interdisciplinario sobre implementación y evaluación de sistemas de energías
+            renovables en comunidades rurales, con énfasis en impacto social y sostenibilidad.
+          </p>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">Requisitos</h6>
+          <ul>
+            <li>Experiencia en energías renovables</li>
+            <li>Trabajo de campo y levantamiento de datos</li>
+            <li>Análisis de impacto ambiental</li>
+          </ul>
+        </section>
+        <section class="mt-3">
+          <h6 class="text-borgona">
+            <i class="fas fa-chart-line me-2"></i>Compatibilidad con tu CV
+          </h6>
+          <div class="modal-match-container">
+            <div class="modal-match-circle" [attr.data-percent]="95">
+              <svg class="modal-match-svg" viewBox="0 0 36 36">
+                <path class="modal-match-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="modal-match-circle-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div class="modal-match-percent">95%</div>
+            </div>
+            <div class="modal-match-info">
+              <p class="match-status match-high">
+                <i class="fas fa-check-circle me-2"></i>
+                ¡Excelente! Tu currículum cumple casi completamente con los requisitos de esta convocatoria.
+              </p>
+              <div class="match-suggestions">
+                <strong>Sugerencias:</strong>
+                <ul>
+                  <li>Revisa que tu CV incluya proyectos similares</li>
+                  <li>Destaca publicaciones relevantes</li>
+                  <li>Incluye referencias de trabajo de campo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-borgona" [routerLink]="'/app/postulacion'" data-bs-dismiss="modal">
+          Postularse
+        </a>
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

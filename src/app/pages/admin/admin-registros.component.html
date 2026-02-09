@@ -1,0 +1,164 @@
+<div class="admin-registros">
+  <h1 class="h4 mb-4 text-borgona">
+    <i class="fas fa-users me-2"></i>Registros
+  </h1>
+  <p class="text-muted small mb-3">Haz clic en una fila para ver el detalle del usuario.</p>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-borgona" role="status"></div>
+    <p class="mt-2 text-muted">Cargando registros...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error" class="admin-card">
+    <div class="admin-card-body">
+      <div class="admin-registros-filtro">
+        <div class="admin-search-wrap">
+          <i class="fas fa-search admin-search-icon"></i>
+          <input
+            id="buscarUsuario"
+            type="search"
+            class="form-control admin-search-input"
+            placeholder="Buscar por nombre, email, CURP, teléfono o perfil..."
+            aria-label="Buscar usuario"
+            [(ngModel)]="filtroTexto"
+            autocomplete="off"
+          />
+        </div>
+        <span class="admin-registros-count text-muted small" *ngIf="filtroTexto.trim()">
+          {{ registrosFiltrados.length }} de {{ registros.length }} usuario(s)
+        </span>
+      </div>
+    </div>
+    <div class="admin-card-body p-0 border-top">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Perfil</th>
+              <th>CURP</th>
+              <th>Teléfono</th>
+              <th>Último acceso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of registrosFiltrados" (click)="verDetalle(r.id)" class="admin-row-clickable">
+              <td>{{ getNombreCompleto(r) }}</td>
+              <td>{{ r.email || '—' }}</td>
+              <td>
+                <span class="badge" [class.bg-primary]="r.tipoPerfil === 'INVESTIGADOR'" [class.bg-success]="r.tipoPerfil === 'INNOVADOR'">
+                  {{ r.tipoPerfil || '—' }}
+                </span>
+              </td>
+              <td><code class="small">{{ r.curp || '—' }}</code></td>
+              <td>{{ r.telefono || '—' }}</td>
+              <td class="small">{{ formatearFecha(r.lastLoginAt) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="registros.length === 0" class="text-center py-5 text-muted">
+        No hay registros aún.
+      </div>
+      <div *ngIf="registros.length > 0 && registrosFiltrados.length === 0" class="text-center py-5 text-muted">
+        <i class="fas fa-search fa-lg mb-2 d-block"></i>
+        Ningún usuario coincide con la búsqueda.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle usuario (clase admin-detalle-usuario-modal para z-index global) -->
+<div class="modal fade admin-detalle-usuario-modal" [class.show]="modalVisible" [style.display]="modalVisible ? 'block' : 'none'" tabindex="-1" role="dialog" aria-labelledby="detalleUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-borgona text-white">
+        <h5 class="modal-title" id="detalleUsuarioLabel">
+          <i class="fas fa-user me-2"></i>Detalle del usuario
+        </h5>
+        <button type="button" class="btn-close btn-close-white" (click)="cerrarModal()" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="detalleLoading" class="text-center py-5">
+          <div class="spinner-border text-borgona" role="status"></div>
+          <p class="mt-2 text-muted">Cargando...</p>
+        </div>
+
+        <div *ngIf="detalle && !detalleLoading" class="detalle-usuario">
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #eee;">
+            <div class="foto-perfil-wrap">
+              <img *ngIf="fotoUrl" [src]="fotoUrl" alt="Foto de perfil" />
+              <div *ngIf="!fotoUrl" class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
+                <i class="fas fa-user fa-2x"></i>
+              </div>
+            </div>
+            <div class="flex-grow-1">
+              <h5 class="mb-1 fw-bold" style="color: #2c2c2c;">{{ getNombreCompleto(detalle) }}</h5>
+              <p class="text-muted small mb-2">{{ detalle.email || '—' }}</p>
+              <span class="badge me-1 py-2 px-2" [class.bg-success]="detalle.enabled" [class.bg-secondary]="!detalle.enabled">
+                {{ detalle.enabled ? 'Activo' : 'Suspendido' }}
+              </span>
+              <span class="badge py-2 px-2" [class.bg-warning]="detalle.locked" [class.bg-secondary]="!detalle.locked">
+                {{ detalle.locked ? 'Bloqueado' : 'Desbloqueado' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="detalle-seccion">
+            <h6 class="detalle-seccion-titulo">Datos personales</h6>
+            <div class="row g-0">
+              <div class="col-12 col-md-6 detalle-campo"><strong>Nombre completo</strong><span class="valor"> {{ getNombreCompleto(detalle) }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Email</strong><span class="valor"> {{ detalle.email || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Usuario</strong><span class="valor"> {{ detalle.username || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Visibilidad perfil</strong><span class="valor"> {{ detalle.visibilidadPerfil || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Cuenta activa</strong><span class="valor"> {{ detalle.enabled ? 'Sí' : 'No' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Cuenta bloqueada</strong><span class="valor"> {{ detalle.locked ? 'Sí' : 'No' }}</span></div>
+              <div class="col-12 detalle-campo"><strong>Último inicio de sesión</strong><span class="valor" [class.text-muted]="!detalle.lastLoginAt"> {{ formatearFecha(detalle.lastLoginAt) }}</span></div>
+            </div>
+          </div>
+
+          <div class="detalle-seccion">
+            <h6 class="detalle-seccion-titulo">Registro (CURP, RFC, perfil)</h6>
+            <div class="row g-0">
+              <div class="col-12 col-md-6 detalle-campo"><strong>CURP</strong> <code>{{ detalle.curp || '—' }}</code></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>RFC</strong> <code>{{ detalle.rfc || '—' }}</code></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Tipo de perfil</strong><span class="valor"> {{ detalle.tipoPerfil || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Teléfono</strong><span class="valor"> {{ detalle.telefono || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Fecha nacimiento</strong><span class="valor"> {{ detalle.fechaNacimiento || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Género</strong><span class="valor"> {{ detalle.genero || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Nacionalidad</strong><span class="valor"> {{ detalle.nacionalidad || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>País nacimiento</strong><span class="valor"> {{ detalle.paisNacimiento || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Entidad federativa</strong><span class="valor"> {{ detalle.entidadFederativa || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Estado civil</strong><span class="valor"> {{ detalle.estadoCivil || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Registro creado</strong><span class="valor"> {{ detalle.createdAt || '—' }}</span></div>
+              <div class="col-12 col-md-6 detalle-campo"><strong>Última actualización</strong><span class="valor"> {{ detalle.updatedAt || '—' }}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer flex-wrap gap-2">
+        <div class="me-auto">
+          <button type="button" class="btn btn-outline-danger btn-sm me-1" (click)="confirmarSuspender()" *ngIf="detalle?.enabled">
+            <i class="fas fa-pause-circle me-1"></i>Suspender
+          </button>
+          <button type="button" class="btn btn-outline-success btn-sm me-1" (click)="confirmarReactivar()" *ngIf="detalle && !detalle.enabled">
+            <i class="fas fa-play-circle me-1"></i>Reactivar
+          </button>
+          <button type="button" class="btn btn-outline-warning btn-sm me-1" (click)="confirmarRestablecerPassword()" *ngIf="detalle">
+            <i class="fas fa-key me-1"></i>Restablecer contraseña
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="confirmarEliminar()" *ngIf="detalle">
+            <i class="fas fa-trash me-1"></i>Eliminar
+          </button>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade" [class.show]="modalVisible" (click)="cerrarModal()"></div>
+</div>

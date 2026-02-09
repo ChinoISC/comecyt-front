@@ -1,0 +1,664 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@fontsource/roboto";
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --color-borgona: #7A1E48;
+  --color-borgona-oscuro: #5e1838;
+  --color-dorado: #9e8e5e;
+  --color-beige: #f8f8f8;
+  --color-gris-claro: #140303;
+  --color-blanco: #FFFFFF;
+}
+
+body {
+  background-color: var(--color-beige);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+}
+
+.header-bar {
+  height: 60px;
+  background-image: url('assets/img/up.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: var(--color-blanco);
+}
+
+.login-container {
+  display: flex;
+  max-width: 900px;
+  margin: auto;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.login-left {
+  flex: 1;
+  background-color: var(--color-beige);
+  padding: 2rem;
+}
+
+.login-right {
+  flex: 1;
+  background-color: var(--color-dorado);
+  color: var(--color-borgona);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.login-right img {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 4px rgba(250, 249, 249, 0.233));
+  background-color: transparent;
+}
+
+/* Títulos y subtítulos */
+.SIMEX-title {
+  color: var(--color-borgona);
+  font-weight: bold;
+}
+
+.SIMEX-subtitle {
+  color: var(--color-borgona);
+  margin-bottom: 2rem;
+}
+
+.comecyt-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-borgona);
+}
+
+.comecyt-subtitle {
+  font-size: 1rem;
+  color: var(--color-borgona);
+}
+
+/* Inputs */
+.input-custom,
+.form-control {
+  background-color: var(--color-beige);
+  border: 1px solid var(--color-borgona);
+  color: #333;
+}
+
+/* Etiquetas */
+.form-label {
+  color: var(--color-borgona);
+}
+
+/* Botones */
+.btn-login,
+.btn-borgona,
+.btn-register {
+  background-color: var(--color-borgona);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-login:hover,
+.btn-borgona:hover,
+.btn-register:hover {
+  background-color: var(--color-borgona-oscuro);
+}
+
+/* Enlaces */
+.forgot-link {
+  color: var(--color-borgona);
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left,
+  .login-right {
+    width: 100%;
+    border-right: none;
+  }
+
+  .login-right img {
+    max-width: 120px;
+  }
+
+  .header-bar {
+    height: 40px;
+    background-size: contain;
+  }
+}
+.is-invalid {
+  border-color: red;
+  background-color: #ffe6e6;
+}
+.bg-borgona {
+  background-color: #7A1E48;
+}
+
+.hover-link {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.hover-link:hover {
+  background-color: #9e8e5e;
+  color: #7A1E48;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: #7A1E48; /* Color vino COMECyT */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+}
+.profile-pic-placeholder {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #7A1E48;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #F5F1E7;
+  font-size: 0.9rem;
+}
+.text-borgona {
+  color: #7A1E48;
+}
+
+.btn-borgona {
+  background-color: #7A1E48;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-borgona:hover {
+  background-color: #5e1838;
+}
+.profile-pic-placeholder,
+.curriculum-placeholder {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #7A1E48;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #F5F1E7;
+  font-size: 0.9rem;
+}
+.border-borgona {
+  border: 1px solid #7A1E48;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.modal-content {
+  background-color: #fff;
+}
+
+.modal-body {
+  background-color: #F5F1E7;
+}
+
+/* ============================================
+   MODAL Z-INDEX FIX - Global
+   ============================================ */
+/* Asegurar que los modales estén por encima de todo */
+.modal-backdrop {
+  z-index: 1040 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: auto !important;
+}
+
+.modal {
+  z-index: 1055 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  pointer-events: none !important; /* El contenedor modal no captura eventos */
+}
+
+/* Asegurar que el modal-dialog sea interactivo */
+.modal-dialog {
+  position: relative !important;
+  margin: 1rem auto !important;
+  pointer-events: auto !important; /* El dialog SÍ captura eventos */
+}
+
+.modal-content {
+  pointer-events: auto !important;
+  position: relative !important;
+}
+
+/* Asegurar que el modal sea interactivo */
+.modal.show {
+  display: block !important;
+}
+
+.modal.show .modal-dialog {
+  transform: none !important;
+}
+
+/* Asegurar que todos los elementos dentro del modal-content sean clickeables */
+.modal-content * {
+  pointer-events: auto !important;
+}
+
+/* Asegurar que los botones y enlaces sean clickeables */
+.modal button,
+.modal a,
+.modal input,
+.modal textarea,
+.modal select {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Forzar que el modal esté por encima de cualquier contenedor */
+body .modal,
+body .modal-backdrop {
+  position: fixed !important;
+  z-index: 1055 !important;
+}
+
+body .modal-backdrop {
+  z-index: 1040 !important;
+}
+
+/* Asegurar que ningún contenedor padre interfiera */
+.container .modal,
+.content .modal,
+main .modal,
+app-root .modal {
+  position: fixed !important;
+  z-index: 1055 !important;
+}
+.input-group-text {
+  border: 1px solid #7A1E48;
+  background-color: #F5F1E7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-custom {
+  border: 1px solid #7A1E48;
+  background-color: #FDFBF7;
+  color: #333;
+}
+
+.btn-borgona {
+  background-color: #7A1E48;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+
+.btn-borgona:hover {
+  background-color: #5e1838;
+}
+:root{
+  --borgona: #7A1E48;
+  --borgona-dark: #5e1838;
+  --bg-soft: #F5F1E7;
+  --card-border: #E2D8CF;
+  --muted: #666666;
+}
+
+/* Base */
+html {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* Previene scroll horizontal */
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #FBF8F4;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Previene scroll horizontal */
+  position: relative; /* Para posicionamiento correcto de elementos fixed/sticky */
+}
+
+
+
+/* Navbar */
+.bg-borgona{ background: var(--borgona) !important; }
+.navbar .nav-link { color: #fff !important; }
+.navbar .nav-link.active { font-weight:700; text-decoration: underline; text-underline-offset:6px; }
+
+/* Typography */
+.text-borgona { color: var(--borgona); }
+.muted-small { font-size: .95rem; color: var(--muted); }
+
+/* Cards and layout */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid var(--card-border);
+  background: #fff;
+}
+.card .card-header {
+  background: #fff9f6;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--borgona);
+  font-weight: 700;
+}
+.card .card-body { background: #fff; }
+
+/* Convocatorias cards */
+.conv-card-title { font-weight: 700; color: var(--borgona); margin:0; display:flex; align-items:center; gap:.5rem; }
+.conv-card-desc { color:#444; margin:.75rem 0 1rem 0; }
+
+/* Buttons */
+.btn-borgona {
+  background: var(--borgona);
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  padding: .5rem .9rem;
+  font-weight: 600;
+}
+.btn-borgona:hover { background: var(--borgona-dark); color: #fff  }
+.btn-outline-secondary { border-radius: 6px; }
+
+/* Inputs and form elements */
+.input-group-text {
+  border: 1px solid var(--card-border);
+  background-color: var(--bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .45rem .6rem;
+}
+.input-custom, .form-control, .form-select {
+  border: 1px solid var(--card-border);
+  background-color: #FFFDFB;
+  color: #222;
+  border-radius: 6px;
+}
+
+/* Small helpers */
+.icon-sm { width:22px; height:22px; display:inline-block; vertical-align:middle; margin-right:.5rem; }
+.input-filter { max-width: 420px; min-width: 180px; }
+.profile-match { display:flex; align-items:center; gap:.5rem; font-weight:600; }
+.dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+.dot-green { background: #2ECC71; }
+.dot-yellow { background: #F1C40F; }
+.dot-red { background: #E74C3C; }
+
+/* Upload placeholders */
+.upload-placeholder {
+  border: 2px dashed var(--borgona);
+  border-radius: 8px;
+  background: var(--bg-soft);
+  height: 120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: #7a6b6b;
+}
+.upload-small { height:90px; }
+
+/* Accessibility helpers */
+[aria-live] { outline: none; }
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .input-filter { max-width: 100%; }
+  .conv-card-desc { font-size: .95rem; }
+  .card .card-header { font-size: .95rem; }
+}
+
+/* ============================================
+   HEADER STICKY FIX - Z-INDEX HIERARCHY
+   ============================================ */
+.sticky-top {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1030 !important;
+}
+
+/* Header debe estar siempre por encima */
+.navbar.sticky-top,
+.comecyt-unified.sticky-top {
+  z-index: 1030 !important;
+}
+
+/* Badge borgona */
+.badge.bg-borgona {
+  background: var(--borgona) !important;
+  color: #fff !important;
+}
+
+/* Asegurar que el contenido no quede debajo del header */
+body {
+  padding-top: 0;
+}
+
+main.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Z-INDEX HIERARCHY GLOBAL
+   ============================================ */
+/* Header/Navbar: 1030 (más alto) */
+/* Modales/Offcanvas: 1050-1060 (Bootstrap default) */
+/* Sidebars fixed: 1040 */
+/* Sticky elements: 10-100 (debajo del header) */
+/* Dropdowns: 20-30 */
+/* Tooltips: 1070 (Bootstrap default) */
+
+/* Prevenir conflictos de z-index */
+.sidebar[style*="position: fixed"],
+.sidebar.position-fixed {
+  z-index: 1040 !important; /* Debajo del header pero por encima del contenido */
+}
+
+.sticky-top-form,
+.sticky-element {
+  z-index: 10 !important; /* Debajo del header */
+}
+
+.dropdown-menu,
+.user-menu .dropdown {
+  z-index: 1020 !important; /* Debajo del header pero por encima del contenido */
+}
+
+/* ============================================
+   OVERFLOW FIXES
+   ============================================ */
+/* Prevenir scroll horizontal en toda la app */
+:host {
+  overflow-x: hidden;
+}
+
+app-root {
+  overflow-x: hidden;
+  display: block;
+  width: 100%;
+}
+
+/* Contenedores principales */
+.container,
+.container-fluid {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Cards y secciones */
+.card,
+.form-section {
+  overflow-x: hidden;
+}
+
+/* ============================================
+   POSITION FIXES
+   ============================================ */
+/* Asegurar que elementos fixed no causen problemas */
+.position-fixed {
+  position: fixed !important;
+}
+
+.position-sticky {
+  position: sticky !important;
+}
+
+/* Asegurar que el header sticky funcione correctamente */
+.comecyt-unified {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+}
+
+/* Profile-specific */
+.profile-pic-placeholder, .curriculum-placeholder {
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fff, #f8f6f4);
+  border: 1px dashed var(--card-border);
+  padding: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: var(--muted);
+  min-height: 96px;
+}
+
+/* Forms feedback */
+.was-validated .form-control:invalid, .form-control.is-invalid {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+.form-control.is-valid {
+  border-color: #198754;
+  box-shadow: none;
+}
+
+/* Small UI polish */
+.btn-borgona.d-flex img { filter: none; margin-right: .45rem; }
+/* Aplica solo a las imágenes dentro del grid de investigadores */
+#investigadoresGrid .card-img-top {
+  width: 100%;
+  height: 220px;             /* altura fija para la cuadrícula; ajusta según diseño */
+  object-fit: cover;         /* recorta centrado sin distorsionar */
+  object-position: center;   /* centra el punto focal */
+  display: block;
+  border-top-left-radius: 10px;   /* coincide con .card border-radius */
+  border-top-right-radius: 10px;
+}
+
+/* Variante más alta para vistas grandes (opcional) */
+@media (min-width: 992px) {
+  #investigadoresGrid .card-img-top {
+    height: 260px;
+  }
+}
+
+/* Variante más compacta para móviles */
+@media (max-width: 575px) {
+  #investigadoresGrid .card-img-top {
+    height: 180px;
+  }
+}
+
+/* Suaviza bordes y mejora enfoque accesible sin afectar otras imágenes */
+#investigadoresGrid .card-img-top,
+#investigadoresGrid .card .img-fluid {
+  border-radius: 8px 8px 0 0;
+  transition: transform .22s ease, box-shadow .18s ease;
+}
+
+/* Pequeña interacción al poner el foco o hover en la imagen (mejora UX) */
+#investigadoresGrid article button:focus .card-img-top,
+#investigadoresGrid article button:hover .card-img-top {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  outline: none;
+}
+/* Asegura que los botones que envuelven las imágenes se vean accesibles */
+#investigadoresGrid article button.btn-link {
+  text-decoration: none;
+  color: inherit;
+}
+/* Si necesitas mostrar imágenes de distintas proporciones sin recortar (alternativa):
+   descomenta la regla object-fit: contain; y ajusta background color si quieres letterbox.
+*/
+/* #investigadoresGrid .card-img-top { object-fit: contain; background: #f7f5f3; } */
+
+/* Modal detalle usuario en panel admin: siempre por encima del header, sidebar y resto */
+.admin-detalle-usuario-modal {
+  position: fixed !important;
+  z-index: 99999 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.admin-detalle-usuario-modal .modal-backdrop {
+  z-index: 99998 !important;
+}
+.admin-detalle-usuario-modal .modal-dialog {
+  z-index: 100000 !important;
+  margin-top: 5rem !important; /* Evita que el modal se corte con el header global */
+}

@@ -1,0 +1,173 @@
+.comecyt-unified--light {
+  background: #fff;
+  border-bottom: 3px solid #6a0032; /* acento institucional */
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  z-index: 1030; /* Asegurar que esté por encima del contenido */
+}
+
+/* Quita inflación visual del navbar */
+.comecyt-unified {
+  padding: 0; /* importante */
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+/* Controla la altura real del contenido */
+.comecyt-unified__inner {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Logos alineados y consistentes */
+.gov-logos {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.gov-logos img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Botón correcto para fondo blanco */
+.comecyt-unified--light .navbar-toggler {
+  border-color: rgba(0,0,0,0.15);
+}
+
+/* Si el icono del toggler se ve raro por overrides globales */
+.comecyt-unified--light .navbar-toggler-icon {
+  filter: none;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .comecyt-unified__inner { min-height: 56px; }
+  .gov-logos img { height: 28px; }
+}
+
+
+.btn-borgona{
+  background:#6a0032 !important;
+  border-color:#6a0032 !important;
+  color:#fff !important;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.btn-ghost-borgona{
+  border:1px solid #6a0032;
+  color:#6a0032;
+  background:transparent;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.btn-ghost-borgona:hover{
+  background: rgba(106,0,50,.06);
+}
+
+.quick-actions .btn{
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+
+.auth-actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-left:auto;
+}
+
+/* Botón borgoña (igual que tu UI) */
+.btn-borgona{
+  background:#6a0032;
+  border-color:#6a0032;
+  color:#fff;
+  font-weight:700;
+  border-radius:12px;
+  padding:.55rem .95rem;
+}
+.btn-borgona:hover{ filter: brightness(.95); }
+
+/* Outline borgoña */
+.btn-outline-borgona{
+  border:1px solid #6a0032;
+  color:#6a0032;
+  background:transparent;
+  font-weight:700;
+  border-radius:12px;
+  padding:.55rem .95rem;
+}
+.btn-outline-borgona:hover{
+  background: rgba(106,0,50,.06);
+}
+
+.perfil-submenu {
+  max-height: 0;
+  list-style: none;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+  padding-left: 1.5rem;
+}
+
+.perfil-menu.open .perfil-submenu {
+  max-height: 300px; /* suficiente para el contenido */
+  opacity: 1;
+}
+
+.perfil-submenu .nav-link {
+  font-size: 0.9rem;
+  padding: 0.25rem 0;
+}
+
+/* Submenús estilo SIIMEX (Acerca, Investigadores, Innovadores, Perfiles) */
+.offcanvas .submenu {
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 1.25rem;
+  margin: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+
+.offcanvas .nav-item.open .submenu {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.offcanvas .submenu .nav-link {
+  font-size: 0.9rem;
+  padding: 0.35rem 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.offcanvas .submenu .nav-link:hover {
+  color: #fff;
+}
+
+.offcanvas .menu-sep {
+  opacity: 0.5;
+}
+
+.offcanvas .btn-cta {
+  background: #6a0032;
+  border-color: #6a0032;
+  color: #fff;
+  font-weight: 600;
+}
+
+.offcanvas .btn-cta:hover {
+  background: #5a002a;
+  border-color: #5a002a;
+  color: #fff;
+}

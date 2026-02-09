@@ -1,0 +1,220 @@
+/* ===== Tokens base (borgoña) ===== */
+:root{
+  --borgona-rgb: 103,49,71; /* rgb(103,49,71) */
+  --borgona-50: rgba(var(--borgona-rgb), .06);
+  --borgona-100: rgba(var(--borgona-rgb), .12);
+  --borgona-600: rgb(var(--borgona-rgb));
+  --text-strong: #2b2b2b;
+  --text-soft: #6b7280;
+  --border: #e6e6e6;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 6px 18px rgba(0,0,0,.10);
+}
+
+.text-borgona{ color: var(--borgona-600) !important; }
+.border-borgona{ border: 1px solid var(--border) !important; }
+
+/* Botón primario */
+.btn-borgona{
+  background: var(--borgona-600);
+  color:#fff;
+  border:1px solid var(--borgona-600);
+  border-radius: 12px;
+  padding: .6rem 1rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.btn-borgona:hover{ filter: brightness(0.96); }
+.btn-borgona:focus-visible{ outline: 3px solid rgba(var(--borgona-rgb), .35); outline-offset: 2px; }
+
+/* Botón fantasma borgoña */
+.btn-ghost-borgona{
+  border:1px solid var(--borgona-600);
+  color: var(--borgona-600);
+  background: transparent;
+  border-radius: 10px;
+  padding: .25rem .6rem;
+}
+.btn-ghost-borgona:hover{ background: var(--borgona-50); }
+
+/* Inputs */
+.input-custom, .form-select{
+  border-color: var(--border);
+  border-radius: 12px;
+  min-height: 44px;
+}
+.input-custom:focus, .form-select:focus{
+  border-color: var(--borgona-600);
+  box-shadow: 0 0 0 3px rgba(var(--borgona-rgb), .18);
+}
+
+/* Superficie y tarjetas */
+.contact-surface .card.contact-card{
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.contact-surface .card.contact-card:hover{ box-shadow: var(--shadow-md); transition: box-shadow .2s ease; }
+
+.card-header.bg-light{
+  background: linear-gradient(180deg, #fff, #f8f8f8);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Fieldset/legend estéticos */
+.fieldset{ border: 1px dashed var(--border); border-radius: 12px; padding: 12px; }
+.legend{ font-size: .95rem; font-weight: 700; color: var(--borgona-600); margin: 0 8px; padding: 0 6px; }
+
+/* Chips */
+.chip-group{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 8px; }
+.chip{
+  background:#fff; border:1px solid var(--border); color: var(--text-strong);
+  padding: 8px 12px; border-radius: 999px; font-weight: 700;
+}
+.chip:hover{ border-color: var(--borgona-600); background: var(--borgona-50); }
+
+/* Status pill */
+.status-pill{
+  display:inline-block; padding: 4px 10px; border-radius: 999px; font-weight:700;
+  background: var(--borgona-50); color: var(--borgona-600);
+}
+.badge.bg-open-now{ background: rgba(16,185,129,.18); color:#065f46; }
+.badge.bg-closed-now{ background: rgba(239,68,68,.18); color:#7f1d1d; }
+
+/* Contador de mensaje */
+.counter{ color: var(--text-soft); font-weight: 700; }
+
+/* KV layout */
+.kv-row{ margin-bottom: 12px; }
+.kv-label{ margin-bottom: 4px; font-weight: 700; color: var(--borgona-600); }
+.kv-value{ margin: 0; }
+
+/* Pequeños detalles */
+.muted-small, .small-muted{ color: var(--text-soft); }
+.dot-sep{ opacity:.6; margin: 0 .25rem; }
+
+/* Responsive */
+@media (max-width: 992px){
+  .chip-group{ gap:6px; }
+}
+
+/* Botón primario – visible SIEMPRE (también en el modal) */
+.btn-borgona{
+  background: var(--borgona-600) !important;
+  border-color: var(--borgona-600) !important;
+  color: #fff !important;
+  border-radius: 12px;
+  padding: .6rem 1rem;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.btn-borgona:hover{ filter: brightness(.96); }
+.btn-borgona:focus-visible{ outline: 3px solid rgba(var(--borgona-rgb), .35); outline-offset: 2px; }
+
+/* Chips de motivo */
+.chip{
+  background:#fff;
+  border:1px solid #e6e6e6;
+  color:#2b2b2b;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: background .18s, color .18s, border-color .18s;
+}
+.chip:hover{ border-color: var(--borgona-600); background: rgba(var(--borgona-rgb), .06); }
+.chip:focus-visible{ outline: 3px solid rgba(var(--borgona-rgb), .35); outline-offset: 2px; }
+
+/* ACTIVO: rgb(103,49,71) + texto blanco */
+.chip.active{
+  background: var(--borgona-600);
+  border-color: var(--borgona-600);
+  color: #fff;
+}
+.chip.active:hover{ filter: brightness(.97); }
+
+/* Por si usas segmented tabs en esta u otras pantallas */
+.segmented-item.active,
+.segmented-item[aria-selected="true"]{
+  background: var(--borgona-600) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+
+
+/* ====== FIX: fuerza color borgoña y estado activo ====== */
+
+/* Botón primario, también dentro de modales */
+.btn-borgona,
+.modal .btn-borgona {
+  background: rgb(103,49,71) !important;
+  border-color: rgb(103,49,71) !important;
+  color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  border-radius: 12px;
+  padding: .6rem 1rem;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.btn-borgona:hover,
+.modal .btn-borgona:hover { filter: brightness(.96); }
+.btn-borgona:focus-visible,
+.modal .btn-borgona:focus-visible {
+  outline: 3px solid rgba(103,49,71,.35);
+  outline-offset: 2px;
+}
+
+/* Si hay variantes Bootstrap que se metan, neutralízalas */
+.btn-borgona.btn-outline-primary,
+.btn-borgona.btn-light,
+.btn-borgona.btn-secondary {
+  background: rgb(103,49,71) !important;
+  border-color: rgb(103,49,71) !important;
+  color: #fff !important;
+}
+
+/* ====== Chips (con o sin .btn de Bootstrap) ====== */
+.chip,
+.btn.chip {
+  background: #fff !important;
+  border: 1px solid #e6e6e6 !important;
+  color: #2b2b2b !important;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: background .18s, color .18s, border-color .18s, box-shadow .18s;
+}
+.chip:hover,
+.btn.chip:hover {
+  border-color: rgb(103,49,71) !important;
+  background: rgba(103,49,71,.06) !important;
+}
+.chip:focus-visible,
+.btn.chip:focus-visible {
+  outline: 3px solid rgba(103,49,71,.35);
+  outline-offset: 2px;
+}
+
+/* ACTIVO: borgoña + texto blanco (solo el seleccionado) */
+.chip.active,
+.btn.chip.active {
+  background: rgb(103,49,71) !important;
+  border-color: rgb(103,49,71) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+.chip.active:hover,
+.btn.chip.active:hover { filter: brightness(.97); }
+
+/* Por si usas segmented tabs en otras pantallas */
+.segmented-item.active,
+.segmented-item[aria-selected="true"]{
+  background: rgb(103,49,71) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+
+/* Asegura contraste en enlaces dentro de botones borgoña (si los hubiera) */
+.btn-borgona a,
+.modal .btn-borgona a { color: #fff !important; text-decoration: none; }

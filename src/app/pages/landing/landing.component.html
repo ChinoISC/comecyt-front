@@ -1,0 +1,197 @@
+<div class="landing-wrap">
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="hero-gradient"></div>
+      <div class="hero-pattern"></div>
+    </div>
+    
+    <div class="container">
+      <div class="hero-content">
+        <!-- Hero Text -->
+        <div class="hero-text">
+          <div class="hero-badge">
+            <i class="fas fa-certificate me-2"></i>
+            <span>COMECyT · Estado de México</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="hero-title-main">SIIMEX</span>
+            <span class="hero-title-sub">Sistema de Investigadores e Innovadores Mexiquenses</span>
+          </h1>
+
+          <p class="hero-description">
+            Conecta con otras investigadoras y otros investigadores, arma alianzas y construye conocimiento nuevo. 
+            La plataforma oficial para la gestión y seguimiento de investigadoras e investigadores mexiquenses.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-actions">
+            <a *ngIf="!isLoggedIn()" routerLink="/registro" class="btn btn-primary-hero">
+              <i class="fas fa-user-plus me-2"></i>
+              Crear cuenta
+            </a>
+            <a *ngIf="isLoggedIn()" routerLink="/app/convocatorias" class="btn btn-primary-hero">
+              <i class="fas fa-graduation-cap me-2"></i>
+              Ver convocatorias
+            </a>
+            <a *ngIf="!isLoggedIn()" routerLink="/login" class="btn btn-secondary-hero">
+              <i class="fas fa-sign-in-alt me-2"></i>
+              Iniciar sesión
+            </a>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <span>Convocatorias oficiales</span>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <span>Redes y colaboración</span>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <span>Seguimiento centralizado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <div class="hero-image-glow"></div>
+            <img
+              src="assets/img/logo.png"
+              alt="SIIMEX - Sistema de Investigadores e Innovadores Mexiquenses"
+              class="hero-image"
+              loading="eager"
+            />
+            <div class="hero-floating-elements">
+              <div class="floating-element element-1">
+                <i class="fas fa-microscope"></i>
+              </div>
+              <div class="floating-element element-2">
+                <i class="fas fa-flask"></i>
+              </div>
+              <div class="floating-element element-3">
+                <i class="fas fa-book-open"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS SECTION ===== -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-network-wired me-2"></i>
+          Redes de ciencia
+        </h2>
+        <p class="section-subtitle">
+          Porque investigar también es construir comunidad
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <article class="benefit-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="benefit-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3 class="benefit-title">Redes reales</h3>
+          <p class="benefit-text">
+            Conecta con perfiles afines y crea sinergias que sí caminan. 
+            Construye relaciones profesionales duraderas.
+          </p>
+          <div class="benefit-link">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <article class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="benefit-icon icon-knowledge">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="benefit-title">Conocimiento nuevo</h3>
+          <p class="benefit-text">
+            Menos "PDF eterno", más evidencia y resultados. 
+            Accede a investigaciones actualizadas y relevantes.
+          </p>
+          <div class="benefit-link">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <article class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="benefit-icon icon-announcement">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <h3 class="benefit-title">Convocatorias claras</h3>
+          <p class="benefit-text">
+            Encuentra oportunidades sin perderte en el ruido. 
+            Notificaciones directas y filtros inteligentes.
+          </p>
+          <div class="benefit-link">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </article>
+
+        <article class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="benefit-icon icon-organization">
+            <i class="fas fa-folder-open"></i>
+          </div>
+          <h3 class="benefit-title">Orden y seguimiento</h3>
+          <p class="benefit-text">
+            Tu información y seguimiento en un solo lugar. 
+            Gestión centralizada de tu trayectoria académica.
+          </p>
+          <div class="benefit-link">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-content">
+          <h2 class="cta-title">
+            <i class="fas fa-rocket me-2"></i>
+            ¿Listo para comenzar?
+          </h2>
+          <p class="cta-text">
+            Únete a la comunidad de investigadoras e investigadores mexiquenses y comienza a construir tu red profesional hoy mismo.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a *ngIf="!isLoggedIn()" routerLink="/registro" class="btn btn-cta-primary">
+            <i class="fas fa-user-plus me-2"></i>
+            Registrarse ahora
+          </a>
+          <a *ngIf="isLoggedIn()" routerLink="/app/convocatorias" class="btn btn-cta-primary">
+            <i class="fas fa-graduation-cap me-2"></i>
+            Ver convocatorias
+          </a>
+          <a routerLink="/investigadores" class="btn btn-cta-secondary">
+            <i class="fas fa-users me-2"></i>
+            Ver investigadoras e investigadores
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

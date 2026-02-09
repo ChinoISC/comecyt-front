@@ -1,0 +1,38 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-brand">
+      <div class="admin-brand-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="admin-brand-text">
+        <span class="admin-brand-title">Panel Admin</span>
+        <span class="admin-brand-sub">SIIMEX</span>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="admin-nav-link">
+        <i class="fas fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/admin/registros" routerLinkActive="active" class="admin-nav-link">
+        <i class="fas fa-users"></i>
+        <span>Registros</span>
+      </a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <a routerLink="/landing" class="admin-nav-link admin-nav-link-footer" target="_blank">
+        <i class="fas fa-external-link-alt"></i>
+        <span>Ir al sitio</span>
+      </a>
+      <button type="button" class="admin-btn-logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar sesión</span>
+      </button>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-main-inner">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
